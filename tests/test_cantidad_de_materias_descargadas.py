@@ -7,7 +7,7 @@ from src.Materia import MateriaVacia
 
 
 @pytest.mark.asyncio
-async def test_cantidad_de_materias_debe_ser_8():
+async def test_cantidad_de_materias_debe_ser_7():
     base_de_datos = BaseDeDatosEnNotion(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("DATABASE_ID")),
@@ -18,7 +18,7 @@ async def test_cantidad_de_materias_debe_ser_8():
 
     assert (
         len([materia for materia in materias if not isinstance(materia, MateriaVacia)])
-        == 8
+        == 7
     )
 
 

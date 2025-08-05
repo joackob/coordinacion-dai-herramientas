@@ -1,6 +1,4 @@
-from typing import Annotated
-from pydantic import BaseModel, Secret
-from pydantic.types import StringConstraints
+from pydantic import BaseModel
 import logging
 from pprint import pprint
 
@@ -9,7 +7,7 @@ import notion_client as notion
 from src.PaginaDeNotion import PaginaDeNotion, PaginaDeNotionVacia
 
 # tal vez lo use para alguna clase de credenciales, no lo borro
-ClaveNoVacia = Secret[Annotated[str, StringConstraints(min_length=8)]]
+# ClaveNoVacia = Secret[Annotated[str, StringConstraints(min_length=8)]]
 
 
 class BaseDeDatosEnNotion(BaseModel):
@@ -25,9 +23,8 @@ class BaseDeDatosEnNotion(BaseModel):
         )
         self._nombres_de_materias = [
             "Taller de Algoritmos y Programación",
-            "Taller de Tecnologías de la Representación",
             "Algoritmos y Estructuras de Datos",
-            "Administración y Gestión de Base de Datos",
+            "Administración y Gestión de Bases de Datos",
             "Diseño de Software",
             "Diseño Multimedial",
             "Programación Web",
@@ -45,7 +42,7 @@ class BaseDeDatosEnNotion(BaseModel):
                     },
                 }
             )
-            return PaginaDeNotion(respuesta)
+            return PaginaDeNotion(**respuesta)
         except Exception as e:
             pprint(e)
             return PaginaDeNotionVacia()

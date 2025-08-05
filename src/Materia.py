@@ -5,8 +5,7 @@ from src.PaginaDeWord import PaginaDeWord, PaginaDeWordVacia
 @dataclass
 class Materia:
     nombre: str
-    anio_ciclo: str
-    campo_formacion: str
+    anio: str
     carga_horaria: int
     jefx_de_departamento: str
     docentes: list[str]
