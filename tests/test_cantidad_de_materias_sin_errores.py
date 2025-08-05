@@ -12,6 +12,8 @@ async def test_cantidad_de_materias_debe_ser_8():
     )
     materias = []
     async for materia in base_de_datos.materias():
+        if materia.esta_vacia():
+            continue
         materias.append(materia)
 
     assert len(materias) == 8

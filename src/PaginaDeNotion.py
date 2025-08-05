@@ -1,8 +1,8 @@
-from src.Materia import Materia
+from src.Materia import Materia, MateriaVacia
 
 
 class PaginaDeNotion:
-    def __init__(self, datos_primitivos) -> None:
+    def __init__(self, datos_primitivos):
         pass
 
     def exportar_a_materia(self) -> Materia:
@@ -15,3 +15,13 @@ class PaginaDeNotion:
             docentes=["docente1", "docente2"],
             contenido=["contenido1", "contenido2"],
         )
+
+
+class PaginaDeNotionVacia(PaginaDeNotion):
+    def __init__(self):
+        pass
+
+    def exportar_a_materia(self) -> Materia:
+        return MateriaVacia()
+
+    pass

@@ -6,7 +6,7 @@ from pprint import pprint
 
 import notion_client as notion
 
-from src.PaginaDeNotion import PaginaDeNotion
+from src.PaginaDeNotion import PaginaDeNotion, PaginaDeNotionVacia
 
 # tal vez lo use para alguna clase de credenciales, no lo borro
 ClaveNoVacia = Secret[Annotated[str, StringConstraints(min_length=8)]]
@@ -34,9 +34,9 @@ class BaseDeDatosEnNotion(BaseModel):
             "Desarrollo de Sistemas",
         ]
 
-    async def _consultar_por_materia(self, materia: str):
+    async def _consultar_por_materia(self, materia: str) -> PaginaDeNotion:
         try:
-            return await self._notion_client.databases.query(
+            respuesta = await self._notion_client.databases.query(
                 **{
                     "database_id": str(self._database_id),
                     "filter": {
@@ -45,14 +45,12 @@ class BaseDeDatosEnNotion(BaseModel):
                     },
                 }
             )
+            return PaginaDeNotion(respuesta)
         except Exception as e:
             pprint(e)
-            raise Exception(
-                f"Error al consultar la base de datos de Notion: {e}"
-            ) from e
+            return PaginaDeNotionVacia()
 
     async def materias(self):
         for nombre_de_materia in self._nombres_de_materias:
-            respuesta = await self._consultar_por_materia(nombre_de_materia)
-            pagina_de_una_materia = PaginaDeNotion(respuesta)
+            pagina_de_una_materia = await self._consultar_por_materia(nombre_de_materia)
             yield pagina_de_una_materia.exportar_a_materia()
