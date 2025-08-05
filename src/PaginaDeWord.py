@@ -1,0 +1,2 @@
+class PaginaDeWord:
+    pass

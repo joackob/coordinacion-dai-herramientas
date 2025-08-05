@@ -12,6 +12,11 @@ tqdm = "*"
 pydantic = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-asyncio = "*"
+
+[scripts]
+"tests" = "pytest test/"
 
 [requires]
 python_version = "3.12"
