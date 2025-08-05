@@ -12,9 +12,6 @@ class Materia:
     docentes: list[str]
     contenido: list[object]
 
-    def esta_vacia(self) -> bool:
-        return False
-
     def exportar_a_word(self) -> PaginaDeWord:
         return PaginaDeWord()
 
@@ -25,6 +22,3 @@ class MateriaVacia(Materia):
 
     def exportar_a_word(self) -> PaginaDeWord:
         return PaginaDeWordVacia()
-
-    def esta_vacia(self) -> bool:
-        return True
