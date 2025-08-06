@@ -1,8 +1,7 @@
 from typing import Any
-from pydantic import BaseModel, model_validator
 
 
-class Profesor(BaseModel):
+class Profesor:
     _nombre: str
     _apellido: str
 
@@ -12,3 +11,14 @@ class Profesor(BaseModel):
         self._apellido = propiedades["Apellido"]["rollup"]["array"][0]["formula"][
             "string"
         ]
+
+    def __eq__(self, otro_profesor) -> bool:
+        if not isinstance(otro_profesor, Profesor):
+            return False
+        return (
+            self._nombre == otro_profesor._nombre
+            and self._apellido == otro_profesor._apellido
+        )
+
+    def __hash__(self) -> int:
+        return hash((self._nombre, self._apellido))

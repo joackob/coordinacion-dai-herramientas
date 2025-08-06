@@ -17,7 +17,7 @@ class MateriasEnNotion:
         self._notion_client = notion.AsyncClient(
             auth=notion_api_key, log_level=logging.DEBUG
         )
-        self._nombres_de_materias = [
+        self._nombres_de_materias_del_area_dai = [
             "Taller de Algoritmos y Programación",
             "Algoritmos y Estructuras de Datos",
             "Administración y Gestión de Bases de Datos",
@@ -43,9 +43,8 @@ class MateriasEnNotion:
             pprint(e)
             return MateriaVacia()
 
-    async def _consultar_por_programa_de_una_materia(self, materia_id: str):
+    async def consultar_por_programa_de_una_materia_por_su_id(self, materia_id: str):
         try:
-            # respuesta = await self._notion_client.pages.retrieve(page_id=materia_id)
             respuesta = await self._notion_client.blocks.children.list(
                 block_id=materia_id, page_size=100
             )
@@ -55,6 +54,6 @@ class MateriasEnNotion:
             return None
 
     async def materias_del_area_dai(self):
-        for nombre_de_materia in self._nombres_de_materias:
+        for nombre_de_materia in self._nombres_de_materias_del_area_dai:
             pagina_de_una_materia = await self.consultar_por_materia(nombre_de_materia)
             yield pagina_de_una_materia
