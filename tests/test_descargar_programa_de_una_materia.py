@@ -15,9 +15,8 @@ async def test_se_pueden_observar_los_titulos_del_programa_de_tap():
     taller_de_algoritmos_y_programacion_en_notion = (
         await base_de_datos.consultar_por_materia("Taller de Algoritmos y Programación")
     )
-    programa_de_taller_de_algoritmos_y_programacion = (
-        await base_de_datos.consultar_por_programa_de_una_materia_por_su_id(
-            taller_de_algoritmos_y_programacion_en_notion.id
-        )
+    await taller_de_algoritmos_y_programacion_en_notion.descargar_programa(
+        base_de_datos
     )
-    assert len(programa_de_taller_de_algoritmos_y_programacion) > 0
+    # hiper precario
+    assert len(taller_de_algoritmos_y_programacion_en_notion._programa) > 0

@@ -43,16 +43,6 @@ class MateriasEnNotion:
             pprint(e)
             return MateriaVacia()
 
-    async def consultar_por_programa_de_una_materia_por_su_id(self, materia_id: str):
-        try:
-            respuesta = await self._notion_client.blocks.children.list(
-                block_id=materia_id, page_size=100
-            )
-            return respuesta
-        except Exception as e:
-            pprint(e)
-            return None
-
     async def materias_del_area_dai(self):
         for nombre_de_materia in self._nombres_de_materias_del_area_dai:
             pagina_de_una_materia = await self.consultar_por_materia(nombre_de_materia)
