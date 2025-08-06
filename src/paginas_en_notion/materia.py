@@ -27,9 +27,7 @@ class Materia:
         )
 
     async def descargar_programa(self, materias: ProgramasEnNotion):
-        self._programa = await materias.consultar_por_programa_de_una_materia_por_su_id(
-            self._id
-        )
+        self._programa = await materias.consultar_programa_por_materia_id(self._id)
 
 
 class MateriaVacia(Materia):

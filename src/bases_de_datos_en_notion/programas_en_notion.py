@@ -14,7 +14,7 @@ class ProgramasEnNotion:
             auth=notion_api_key, log_level=logging.DEBUG
         )
 
-    async def consultar_por_programa_de_una_materia_por_su_id(
+    async def consultar_programa_por_materia_id(
         self, materia_id: str
     ) -> list[BloqueDeContenido]:
         try:
