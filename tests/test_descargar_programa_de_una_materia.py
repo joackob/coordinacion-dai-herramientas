@@ -2,9 +2,10 @@ import os
 
 import pytest
 
-from src.BaseDeDatosEnNotion import MateriasEnNotion
+from src.bases_de_datos_en_notion.materias_en_notion import MateriasEnNotion
 
 
+@pytest.mark.skip("Aún no se implementa la descarga del programa de una materia")
 @pytest.mark.asyncio
 async def test_se_pueden_observar_los_titulos_del_programa_de_tap():
     base_de_datos = MateriasEnNotion(

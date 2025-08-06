@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.BaseDeDatosEnNotion import MateriasEnNotion
+from src.bases_de_datos_en_notion.materias_en_notion import MateriasEnNotion
 from src.PaginaDeNotion import MateriaVacia
 
 
