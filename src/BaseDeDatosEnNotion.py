@@ -38,11 +38,7 @@ class NominaEnNotion:
                 }
             )
 
-            return [
-                Profesor(**dato)
-                for dato in respuesta["results"]
-                if "properties" in dato
-            ]
+            return [Profesor(**dato) for dato in respuesta["results"]]
 
         except Exception as e:
             pprint(e)
