@@ -15,33 +15,27 @@ class Contenido:
 
 
 class Encabezado1(Contenido):
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class Encabezado2(Contenido):
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class Encabezado3(Contenido):
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class Parrafo(Contenido):
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class ListaConViñetas(Contenido):
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class ListaNumerada(Contenido):
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class ListaConToDo(Contenido):
@@ -53,13 +47,11 @@ class ListaConToDo(Contenido):
 
 
 class Llamada(Contenido):  # callout
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class Cite(Contenido):  # quote
-    def __init__(self, data: Any):
-        super().__init__(data)
+    pass
 
 
 class Codigo(Contenido):
