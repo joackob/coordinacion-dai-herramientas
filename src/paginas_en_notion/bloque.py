@@ -1,4 +1,7 @@
 from typing import Any
+from src.documentos_en_word.programa import Programa
+from docx.document import Document
+from docx.shared import Inches
 
 
 class Contenido:
@@ -13,29 +16,40 @@ class Contenido:
         else:
             self._contenido_plano = ""
 
+    def insertar_en_documento(self, documento: Document):
+        """Por defecto, inserta como párrafo simple."""
+        documento.add_paragraph(self._contenido_plano)
+
 
 class Encabezado1(Contenido):
-    pass
+    def insertar_en_documento(self, documento: Document):
+        documento.add_heading(self._contenido_plano, level=1)
 
 
 class Encabezado2(Contenido):
-    pass
+    def insertar_en_documento(self, documento: Document):
+        documento.add_heading(self._contenido_plano, level=2)
 
 
 class Encabezado3(Contenido):
-    pass
+    def insertar_en_documento(self, documento: Document):
+        documento.add_heading(self._contenido_plano, level=3)
 
 
 class Parrafo(Contenido):
-    pass
+    def insertar_en_documento(self, documento: Document):
+        documento.add_paragraph(self._contenido_plano)
 
 
 class ListaConViñetas(Contenido):
-    pass
+    def insertar_en_documento(self, documento: Document):
+        # python-docx no soporta listas automáticas, pero se puede simular con símbolos
+        documento.add_paragraph(f"• {self._contenido_plano}", style="ListBullet")
 
 
 class ListaNumerada(Contenido):
-    pass
+    def insertar_en_documento(self, documento: Document):
+        documento.add_paragraph(self._contenido_plano, style="ListNumber")
 
 
 class ListaConToDo(Contenido):
@@ -45,13 +59,23 @@ class ListaConToDo(Contenido):
         super().__init__(data)
         self.checked = data.get("checked", False)
 
+    def insertar_en_documento(self, documento: Document):
+        check = "☑" if self.checked else "☐"
+        documento.add_paragraph(f"{check} {self._contenido_plano}")
+
 
 class Llamada(Contenido):  # callout
-    pass
+    def insertar_en_documento(self, documento: Document):
+        # Simular un callout usando un símbolo
+        documento.add_paragraph(f"💡 {self._contenido_plano}")
 
 
 class Cite(Contenido):  # quote
-    pass
+    def insertar_en_documento(self, documento: Document):
+        p = documento.add_paragraph(self._contenido_plano)
+        # Simular cita usando sangría
+        p.paragraph_format.left_indent = Inches(0.5)
+        p.style = "Intense Quote" if "Intense Quote" in documento.styles else p.style
 
 
 class Codigo(Contenido):
@@ -61,40 +85,57 @@ class Codigo(Contenido):
         super().__init__(data)
         self.lenguaje = data.get("language", "")
 
+    def insertar_en_documento(self, documento: Document):
+        # Simular bloque de código con fuente monoespaciada
+        p = documento.add_paragraph()
+        run = p.add_run(self._contenido_plano)
+        run.font.name = "Courier New"
+        # Opcional: agregar sombreado o estilo personalizado si se requiere
+
 
 class Separador(Contenido):  # divider
-    def __init__(self, data: Any):
-        self._contenido_plano = "---"  # texto arbitrario, ya que no tiene contenido
+    def __init__(self, _: Any):
+        self._contenido_plano = "---"
+
+    def insertar_en_documento(self, documento: Document):
+        # Simular divisor con una línea
+        p = documento.add_paragraph()
+        run = p.add_run("_" * 30)
+        run.italic = True
 
 
 class BloqueDeContenido:
-    contenido: Contenido
+    _contenido: Contenido
 
     def __init__(self, data: Any):
         tipo = data["type"]
         bloque = data[tipo]
 
         if tipo == "paragraph":
-            self.contenido = Parrafo(bloque)
+            self._contenido = Parrafo(bloque)
         elif tipo == "heading_1":
-            self.contenido = Encabezado1(bloque)
+            self._contenido = Encabezado1(bloque)
         elif tipo == "heading_2":
-            self.contenido = Encabezado2(bloque)
+            self._contenido = Encabezado2(bloque)
         elif tipo == "heading_3":
-            self.contenido = Encabezado3(bloque)
+            self._contenido = Encabezado3(bloque)
         elif tipo == "bulleted_list_item":
-            self.contenido = ListaConViñetas(bloque)
+            self._contenido = ListaConViñetas(bloque)
         elif tipo == "numbered_list_item":
-            self.contenido = ListaNumerada(bloque)
+            self._contenido = ListaNumerada(bloque)
         elif tipo == "to_do":
-            self.contenido = ListaConToDo(bloque)
+            self._contenido = ListaConToDo(bloque)
         elif tipo == "callout":
-            self.contenido = Llamada(bloque)
+            self._contenido = Llamada(bloque)
         elif tipo == "quote":
-            self.contenido = Cite(bloque)
+            self._contenido = Cite(bloque)
         elif tipo == "code":
-            self.contenido = Codigo(bloque)
+            self._contenido = Codigo(bloque)
         elif tipo == "divider":
-            self.contenido = Separador(bloque)
+            self._contenido = Separador(bloque)
         else:
-            self.contenido = Contenido(bloque)
+            self._contenido = Contenido(bloque)
+
+    def insertar_en_documento(self, programa: Programa):
+        self._contenido.insertar_en_documento(programa.documento)
+        pass

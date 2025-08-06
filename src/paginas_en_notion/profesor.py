@@ -22,3 +22,6 @@ class Profesor:
 
     def __hash__(self) -> int:
         return hash((self._nombre, self._apellido))
+
+    def __str__(self) -> str:
+        return f"{self._nombre} {self._apellido}"

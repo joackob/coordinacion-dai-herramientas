@@ -4,6 +4,7 @@ from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
 from src.bases_de_datos_en_notion.nomina_en_notion import NominaEnNotion
 from src.paginas_en_notion.bloque import BloqueDeContenido
 from src.paginas_en_notion.profesor import Profesor
+from src.documentos_en_word.programa import Programa
 
 
 class Materia:
@@ -12,7 +13,7 @@ class Materia:
     _anio: str
     _carga_horaria: int
     _profesores_a_cargo: set[Profesor] = set()
-    _programa: list[BloqueDeContenido] = []
+    _contenido: list[BloqueDeContenido] = []
 
     def __init__(self, data: Any):
         propiedades = data["results"][0]["properties"]
@@ -25,9 +26,28 @@ class Materia:
         self._profesores_a_cargo = await nomina.consultar_por_profesores_de_una_materia(
             self._nombre
         )
+        return self
 
-    async def descargar_programa(self, materias: ProgramasEnNotion):
-        self._programa = await materias.consultar_programa_por_materia_id(self._id)
+    async def descargar_contenido_asociado(self, materias: ProgramasEnNotion):
+        self._contenido = await materias.consultar_programa_por_materia_id(self._id)
+        return self
+
+    async def crear_documento_para_el_programa(self):
+        documento = Programa(
+            id=self._id,
+            asignatura=self._nombre,
+            anio_ciclo=self._anio,
+            carga_horaria=self._carga_horaria,
+        )
+
+        documento.agregar_nombre_de_docentes(
+            [str(profesor) for profesor in self._profesores_a_cargo]
+        )
+
+        for bloque in self._contenido:
+            bloque.insertar_en_documento(documento)
+
+        return documento
 
 
 class MateriaVacia(Materia):
