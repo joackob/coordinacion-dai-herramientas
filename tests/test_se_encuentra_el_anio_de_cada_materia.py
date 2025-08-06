@@ -2,31 +2,28 @@ import os
 
 import pytest
 
-from src.BaseDeDatosEnNotion import BaseDeDatosEnNotion
+from src.BaseDeDatosEnNotion import MateriasEnNotion
 
 
 @pytest.mark.asyncio
 async def test_se_encuentra_el_anio_de_tap_entre_las_materias():
-    base_de_datos = BaseDeDatosEnNotion(
+    base_de_datos = MateriasEnNotion(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
-        database_id=str(os.getenv("DATABASE_ID")),
+        database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
         await base_de_datos._consultar_por_materia(
             "Taller de Algoritmos y Programación"
         )
     )
-    taller_de_algoritmos_y_programacion = (
-        taller_de_algoritmos_y_programacion_en_notion.exportar_a_materia()
-    )
-    assert taller_de_algoritmos_y_programacion.anio == "3ro"
+    assert taller_de_algoritmos_y_programacion_en_notion.anio == "3ro"
 
 
 @pytest.mark.asyncio
 async def test_se_encuentra_el_anio_de_varias_materias():
-    base_de_datos = BaseDeDatosEnNotion(
+    base_de_datos = MateriasEnNotion(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
-        database_id=str(os.getenv("DATABASE_ID")),
+        database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     materias = [
         {"nombre": "Diseño de Software", "anio": "5to"},
@@ -37,5 +34,4 @@ async def test_se_encuentra_el_anio_de_varias_materias():
         materia_en_notion = await base_de_datos._consultar_por_materia(
             materia["nombre"]
         )
-        materia_exportada = materia_en_notion.exportar_a_materia()
-        assert materia_exportada.anio == materia["anio"]
+        assert materia_en_notion.anio == materia["anio"]

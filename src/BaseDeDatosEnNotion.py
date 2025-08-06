@@ -1,22 +1,60 @@
 from pydantic import BaseModel
+from dataclasses import dataclass
 import logging
 from pprint import pprint
 
 import notion_client as notion
 
-from src.PaginaDeNotion import PaginaDeNotion, PaginaDeNotionVacia
-
-# tal vez lo use para alguna clase de credenciales, no lo borro
-# ClaveNoVacia = Secret[Annotated[str, StringConstraints(min_length=8)]]
+from src.PaginaDeNotion import Materia, MateriaVacia, Profesor
 
 
-class BaseDeDatosEnNotion(BaseModel):
-    _notion_api_key: str
+@dataclass
+class NominaEnNotion:
     _database_id: str
     _notion_client: notion.AsyncClient
 
     def __init__(self, notion_api_key: str, database_id: str):
-        self._notion_api_key = notion_api_key
+        self._database_id = database_id
+        self._notion_client = notion.AsyncClient(
+            auth=notion_api_key, log_level=logging.DEBUG
+        )
+
+    async def _consultar_por_profesores_al_frente_de_una_materia(
+        self, materia: str
+    ) -> list[Profesor]:
+        try:
+            respuesta = await self._notion_client.databases.query(
+                **{
+                    "database_id": self._database_id,
+                    "filter": {
+                        "and": [
+                            {
+                                "property": "Materia",
+                                "formula": {"string": {"equals": materia}},
+                            },
+                            {"property": "Rol", "select": {"equals": "Profesor"}},
+                        ]
+                    },
+                }
+            )
+
+            return [
+                Profesor(**dato)
+                for dato in respuesta["results"]
+                if "properties" in dato
+            ]
+
+        except Exception as e:
+            pprint(e)
+            return []
+
+
+@dataclass
+class MateriasEnNotion:
+    _database_id: str
+    _notion_client: notion.AsyncClient
+
+    def __init__(self, notion_api_key: str, database_id: str):
         self._database_id = database_id
         self._notion_client = notion.AsyncClient(
             auth=notion_api_key, log_level=logging.DEBUG
@@ -31,23 +69,23 @@ class BaseDeDatosEnNotion(BaseModel):
             "Desarrollo de Sistemas",
         ]
 
-    async def _consultar_por_materia(self, materia: str) -> PaginaDeNotion:
+    async def _consultar_por_materia(self, materia: str) -> Materia:
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
-                    "database_id": str(self._database_id),
+                    "database_id": self._database_id,
                     "filter": {
                         "property": "Nombre",
                         "rich_text": {"contains": materia},
                     },
                 }
             )
-            return PaginaDeNotion(**respuesta)
+            return Materia(**respuesta)
         except Exception as e:
             pprint(e)
-            return PaginaDeNotionVacia()
+            return MateriaVacia()
 
     async def materias(self):
         for nombre_de_materia in self._nombres_de_materias:
             pagina_de_una_materia = await self._consultar_por_materia(nombre_de_materia)
-            yield pagina_de_una_materia.exportar_a_materia()
+            yield pagina_de_una_materia
