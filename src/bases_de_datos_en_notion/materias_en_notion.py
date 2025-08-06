@@ -4,7 +4,7 @@ from pprint import pprint
 
 import notion_client as notion
 
-from src.PaginaDeNotion import Materia, MateriaVacia
+from src.paginas_en_notion.materia import Materia, MateriaVacia
 
 
 @dataclass
@@ -42,6 +42,17 @@ class MateriasEnNotion:
         except Exception as e:
             pprint(e)
             return MateriaVacia()
+
+    async def _consultar_por_programa_de_una_materia(self, materia_id: str):
+        try:
+            # respuesta = await self._notion_client.pages.retrieve(page_id=materia_id)
+            respuesta = await self._notion_client.blocks.children.list(
+                block_id=materia_id, page_size=100
+            )
+            return respuesta
+        except Exception as e:
+            pprint(e)
+            return None
 
     async def materias(self):
         for nombre_de_materia in self._nombres_de_materias:

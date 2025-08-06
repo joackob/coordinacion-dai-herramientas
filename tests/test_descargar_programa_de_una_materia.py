@@ -17,4 +17,9 @@ async def test_se_pueden_observar_los_titulos_del_programa_de_tap():
             "Taller de Algoritmos y Programación"
         )
     )
-    assert taller_de_algoritmos_y_programacion_en_notion.anio == "3ro"
+    programa_de_taller_de_algoritmos_y_programacion = (
+        await base_de_datos._consultar_por_programa_de_una_materia(
+            taller_de_algoritmos_y_programacion_en_notion.id
+        )
+    )
+    assert len(programa_de_taller_de_algoritmos_y_programacion) > 0
