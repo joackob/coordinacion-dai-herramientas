@@ -13,7 +13,7 @@ async def test_cantidad_de_materias_debe_ser_7():
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     materias = []
-    async for materia in base_de_datos.materias():
+    async for materia in base_de_datos.materias_del_area_dai():
         materias.append(materia)
 
     assert (
@@ -29,7 +29,7 @@ async def test_cantidad_de_materias_debe_ser_0_al_no_tener_acceso_notion_api():
         database_id="invalid_database_id",
     )
     materias = []
-    async for materia in base_de_datos.materias():
+    async for materia in base_de_datos.materias_del_area_dai():
         materias.append(materia)
 
     assert (

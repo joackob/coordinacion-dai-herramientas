@@ -3,16 +3,12 @@ from pydantic import BaseModel, model_validator
 
 
 class Profesor(BaseModel):
-    nombre: str
-    apellido: str
+    _nombre: str
+    _apellido: str
 
-    @model_validator(mode="before")
-    @classmethod
-    def _parsear_propiedades_de_la_pagina(cls, data: Any) -> Any:
+    def __init__(self, data: Any):
         propiedades = data["properties"]
-        return {
-            "nombre": propiedades["Nombre"]["rollup"]["array"][0]["formula"]["string"],
-            "apellido": propiedades["Apellido"]["rollup"]["array"][0]["formula"][
-                "string"
-            ],
-        }
+        self._nombre = propiedades["Nombre"]["rollup"]["array"][0]["formula"]["string"]
+        self._apellido = propiedades["Apellido"]["rollup"]["array"][0]["formula"][
+            "string"
+        ]

@@ -18,7 +18,7 @@ class NominaEnNotion:
             auth=notion_api_key, log_level=logging.DEBUG
         )
 
-    async def _consultar_por_profesores_al_frente_de_una_materia(
+    async def consultar_por_profesores_al_frente_de_una_materia(
         self, materia: str
     ) -> list[Profesor]:
         try:
@@ -37,7 +37,7 @@ class NominaEnNotion:
                 }
             )
 
-            return [Profesor(**dato) for dato in respuesta["results"]]
+            return [Profesor(dato) for dato in respuesta["results"]]
 
         except Exception as e:
             pprint(e)

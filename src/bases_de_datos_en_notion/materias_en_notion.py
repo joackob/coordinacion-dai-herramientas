@@ -27,7 +27,7 @@ class MateriasEnNotion:
             "Desarrollo de Sistemas",
         ]
 
-    async def _consultar_por_materia(self, materia: str) -> Materia:
+    async def consultar_por_materia(self, materia: str) -> Materia:
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
@@ -38,7 +38,7 @@ class MateriasEnNotion:
                     },
                 }
             )
-            return Materia(**respuesta)
+            return Materia(respuesta)
         except Exception as e:
             pprint(e)
             return MateriaVacia()
@@ -54,7 +54,7 @@ class MateriasEnNotion:
             pprint(e)
             return None
 
-    async def materias(self):
+    async def materias_del_area_dai(self):
         for nombre_de_materia in self._nombres_de_materias:
-            pagina_de_una_materia = await self._consultar_por_materia(nombre_de_materia)
+            pagina_de_una_materia = await self.consultar_por_materia(nombre_de_materia)
             yield pagina_de_una_materia

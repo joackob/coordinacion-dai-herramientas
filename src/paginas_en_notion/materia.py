@@ -1,23 +1,26 @@
 from typing import Any
-from pydantic import BaseModel, model_validator
 
 
-class Materia(BaseModel):
-    id: str
-    nombre: str
-    anio: str
-    carga_horaria: int
+class Materia:
+    _id: str
+    _nombre: str
+    _anio: str
+    _carga_horaria: int
 
-    @model_validator(mode="before")
-    @classmethod
-    def _parsear_propiedades_de_la_pagina(cls, data: Any) -> Any:
+    def __init__(self, data: Any):
         propiedades = data["results"][0]["properties"]
-        return {
-            "nombre": propiedades["Nombre"]["formula"]["string"],
-            "anio": propiedades["Año"]["select"]["name"],
-            "carga_horaria": propiedades["Carga Horaria Semanal"]["number"],
-            "id": data["results"][0]["id"],
-        }
+        self._id = data["results"][0]["id"]
+        self._nombre = propiedades["Nombre"]["formula"]["string"]
+        self._anio = propiedades["Año"]["select"]["name"]
+        self._carga_horaria = propiedades["Carga Horaria Semanal"]["number"]
+
+    @property
+    def anio(self) -> str:
+        return self._anio
+
+    @property
+    def nombre(self) -> str:
+        return self._nombre
 
 
 class MateriaVacia(Materia):

@@ -12,9 +12,7 @@ async def test_se_encuentra_el_anio_de_tap_entre_las_materias():
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
-        await base_de_datos._consultar_por_materia(
-            "Taller de Algoritmos y Programación"
-        )
+        await base_de_datos.consultar_por_materia("Taller de Algoritmos y Programación")
     )
     assert taller_de_algoritmos_y_programacion_en_notion.anio == "3ro"
 
@@ -31,7 +29,5 @@ async def test_se_encuentra_el_anio_de_varias_materias():
         {"nombre": "Taller de Algoritmos y Programación", "anio": "3ro"},
     ]
     for materia in materias:
-        materia_en_notion = await base_de_datos._consultar_por_materia(
-            materia["nombre"]
-        )
+        materia_en_notion = await base_de_datos.consultar_por_materia(materia["nombre"])
         assert materia_en_notion.anio == materia["anio"]

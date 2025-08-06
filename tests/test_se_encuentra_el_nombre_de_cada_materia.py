@@ -12,9 +12,7 @@ async def test_se_encuentra_tap_entre_las_materias():
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
-        await base_de_datos._consultar_por_materia(
-            "Taller de Algoritmos y Programación"
-        )
+        await base_de_datos.consultar_por_materia("Taller de Algoritmos y Programación")
     )
     assert (
         taller_de_algoritmos_y_programacion_en_notion.nombre
@@ -39,7 +37,7 @@ async def test_se_encuentra_los_nombres_materias_de_todas_las_materias_de_dai():
         "Desarrollo de Sistemas",
     ]
     for nombre_de_materia in nombres_de_materias:
-        pagina_de_una_materia = await base_de_datos._consultar_por_materia(
+        pagina_de_una_materia = await base_de_datos.consultar_por_materia(
             nombre_de_materia
         )
         assert pagina_de_una_materia.nombre == nombre_de_materia
