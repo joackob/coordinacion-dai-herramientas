@@ -28,9 +28,10 @@ async def test_crear_archivo_word_con_los_datos_de_tap():
     await taller_de_algoritmos_y_programacion_en_notion.determinar_profesores_a_cargo(
         nomina
     )
-    # await taller_de_algoritmos_y_programacion_en_notion.descargar_contenido_asociado(
-    #     programas
-    # )
+
+    await taller_de_algoritmos_y_programacion_en_notion.descargar_contenido_asociado(
+        programas
+    )
 
     taller_de_algoritmos_y_programacion_en_word = (
         taller_de_algoritmos_y_programacion_en_notion

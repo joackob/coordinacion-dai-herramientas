@@ -44,12 +44,12 @@ class Parrafo(Contenido):
 class ListaConViñetas(Contenido):
     def insertar_en_documento(self, documento: Document):
         # python-docx no soporta listas automáticas, pero se puede simular con símbolos
-        documento.add_paragraph(f"• {self._contenido_plano}", style="ListBullet")
+        documento.add_paragraph(f"• {self._contenido_plano}", style="List Bullet")
 
 
 class ListaNumerada(Contenido):
     def insertar_en_documento(self, documento: Document):
-        documento.add_paragraph(self._contenido_plano, style="ListNumber")
+        documento.add_paragraph(self._contenido_plano, style="List Number")
 
 
 class ListaConToDo(Contenido):
@@ -137,5 +137,5 @@ class BloqueDeContenido:
             self._contenido = Contenido(bloque)
 
     def insertar_en_documento(self, programa: Programa):
-        self._contenido.insertar_en_documento(programa.documento)
-        pass
+        self._contenido.insertar_en_documento(programa._documento)
+        return self

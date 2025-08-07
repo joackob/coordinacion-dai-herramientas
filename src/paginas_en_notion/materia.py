@@ -43,6 +43,8 @@ class Materia:
             [str(profesor) for profesor in self._profesores_a_cargo]
         )
 
+        documento.separar_tabla_con_datos_del_contenido()
+
         for bloque in self._contenido:
             bloque.insertar_en_documento(documento)
 

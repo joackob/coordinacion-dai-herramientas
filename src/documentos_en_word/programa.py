@@ -3,8 +3,9 @@ from docx.document import Document as DocumentObject
 from docx.table import Table
 from docx.shared import Pt
 from pathlib import Path
+from docx.enum.style import WD_STYLE_TYPE
 
-ubicacion_documento_plantilla = "./templates/programa_template.docx"
+ubicacion_documento_plantilla = "./templates/programa_template copy.docx"
 
 
 class Programa:
@@ -19,6 +20,23 @@ class Programa:
         ubicacion_documento_plantilla_path = Path(ubicacion_documento_plantilla)
         ubicacion_documento_plantilla_path.resolve()
         self._documento = Document(ubicacion_documento_plantilla_path.__str__())
+
+        # Customizar el estilo de los encabezados y parrafos para todo el documento
+        documento_con_estilos_por_defecto = Document()
+        self._documento.styles.add_style(
+            "Heading 2", documento_con_estilos_por_defecto.styles["Heading 2"].type
+        )
+
+        self._documento.styles.add_style(
+            "Heading 3", documento_con_estilos_por_defecto.styles["Heading 3"].type
+        )
+        self._documento.styles.add_style(
+            "List Bullet", documento_con_estilos_por_defecto.styles["List Bullet"].type
+        )
+        # self._documento.styles.add_style("Heading 2", WD_STYLE_TYPE.PARAGRAPH)
+        # self._documento.styles.add_style("List Bullet", WD_STYLE_TYPE.PARAGRAPH)
+
+        # Obtener la tabla que contiene los datos requeridos
         self._tabla_con_datos_requeridos = self._documento.tables[0]
 
         # Completar los datos básicos en la tabla del documento
@@ -66,6 +84,10 @@ class Programa:
         docentes_en_tabla.font.size = Pt(14)
         docentes_en_tabla.font.bold = True
         return self
+
+    def separar_tabla_con_datos_del_contenido(self):
+        # Insertar un salto de página despues de la primera pagina
+        self._documento.add_page_break()
 
     def guardar(self):
         carpeta_contenedora = Path("./programas")
