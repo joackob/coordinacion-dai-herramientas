@@ -28,19 +28,18 @@ class Materia:
         )
         return self
 
-    async def descargar_contenido_asociado(self, materias: ProgramasEnNotion):
-        self._contenido = await materias.consultar_programa_por_materia_id(self._id)
+    async def descargar_contenido_asociado(self, programas: ProgramasEnNotion):
+        self._contenido = await programas.consultar_programa_por_materia_id(self._id)
         return self
 
-    async def crear_documento_para_el_programa(self):
+    def crear_documento_para_el_programa(self):
         documento = Programa(
-            id=self._id,
             asignatura=self._nombre,
             anio_ciclo=self._anio,
             carga_horaria=self._carga_horaria,
         )
 
-        documento.agregar_nombre_de_docentes(
+        documento.agregar_nombres_de_docentes(
             [str(profesor) for profesor in self._profesores_a_cargo]
         )
 
