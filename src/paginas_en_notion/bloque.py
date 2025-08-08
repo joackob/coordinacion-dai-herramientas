@@ -1,7 +1,7 @@
 from typing import Any
 from src.documentos_en_word.programa import Programa
 from docx.document import Document
-from docx.shared import Inches
+from docx.shared import Inches, Pt
 
 
 class Contenido:
@@ -23,7 +23,11 @@ class Contenido:
 
 class Encabezado1(Contenido):
     def insertar_en_documento(self, documento: Document):
-        documento.add_heading(self._contenido_plano, level=1)
+        titulo = documento.add_heading(self._contenido_plano, level=1)
+        if titulo.style:
+            titulo.style.font.name = "Arial"
+            titulo.style.font.size = Pt(14)
+            titulo.style.font.bold = True
 
 
 class Encabezado2(Contenido):

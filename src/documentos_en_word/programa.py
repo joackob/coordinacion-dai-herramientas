@@ -20,20 +20,27 @@ class Programa:
         ubicacion_de_documento_plantilla.resolve()
         self._documento = Document(f"{ubicacion_de_documento_plantilla}")
 
-        # Customizar el estilo de los encabezados y parrafos para todo el documento
-        documento_con_estilos_por_defecto = Document()
-        self._documento.styles.add_style(
-            "Heading 2", documento_con_estilos_por_defecto.styles["Heading 2"].type
+        # Agregar estilos que no existen en el documento
+        estilo_encabezado_2 = self._documento.styles.add_style(
+            "Heading 2", WD_STYLE_TYPE.PARAGRAPH
         )
+        estilo_encabezado_2.font.name = "Arial"
+        estilo_encabezado_2.font.size = Pt(13)
+        estilo_encabezado_2.font.bold = True
 
-        self._documento.styles.add_style(
-            "Heading 3", documento_con_estilos_por_defecto.styles["Heading 3"].type
+        estilo_encabezado_3 = self._documento.styles.add_style(
+            "Heading 3", WD_STYLE_TYPE.PARAGRAPH
         )
-        self._documento.styles.add_style(
-            "List Bullet", documento_con_estilos_por_defecto.styles["List Bullet"].type
+        estilo_encabezado_3.font.name = "Arial"
+        estilo_encabezado_3.font.size = Pt(13)
+        estilo_encabezado_3.font.bold = True
+
+        estilo_item_de_lista_desordenada = self._documento.styles.add_style(
+            "List Bullet", WD_STYLE_TYPE.PARAGRAPH
         )
-        # self._documento.styles.add_style("Heading 2", WD_STYLE_TYPE.PARAGRAPH)
-        # self._documento.styles.add_style("List Bullet", WD_STYLE_TYPE.PARAGRAPH)
+        estilo_item_de_lista_desordenada.font.name = "Arial"
+        estilo_item_de_lista_desordenada.font.size = Pt(12)
+        estilo_item_de_lista_desordenada.paragraph_format.line_spacing = 1.5
 
         # Obtener la tabla que contiene los datos requeridos
         self._tabla_con_datos_requeridos = self._documento.tables[0]
@@ -42,11 +49,6 @@ class Programa:
         # Asignatura
         asignatura_en_tabla = self._tabla_con_datos_requeridos.cell(1, 1)
         asignatura_en_tabla.text = asignatura
-        # asignatura_en_tabla = asignatura_en_tabla.paragraphs[0]
-        # asignatura_en_tabla = asignatura_en_tabla.add_run(asignatura)
-        # asignatura_en_tabla.font.size = Pt(14)
-        # asignatura_en_tabla.font.bold = True
-        # asignatura_en_tabla.font.name = "Arial"
         # Año/Ciclo
         anio_ciclo_en_tabla = self._tabla_con_datos_requeridos.cell(2, 1)
         anio_ciclo_en_tabla.text = anio_ciclo
