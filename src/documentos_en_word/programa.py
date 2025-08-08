@@ -4,8 +4,8 @@ from docx.table import Table
 from docx.shared import Pt
 from pathlib import Path
 from docx.enum.style import WD_STYLE_TYPE
-
-ubicacion_documento_plantilla = "./templates/programa_template copy.docx"
+from config import ubicacion_de_documento_plantilla
+from config import ubicacion_carpeta_donde_guardar_programas_generados
 
 
 class Programa:
@@ -17,9 +17,8 @@ class Programa:
 
     def __init__(self, asignatura: str, anio_ciclo: str, carga_horaria: int):
         # Abrir el documento de Word que servirá como plantilla
-        ubicacion_documento_plantilla_path = Path(ubicacion_documento_plantilla)
-        ubicacion_documento_plantilla_path.resolve()
-        self._documento = Document(ubicacion_documento_plantilla_path.__str__())
+        ubicacion_de_documento_plantilla.resolve()
+        self._documento = Document(f"{ubicacion_de_documento_plantilla}")
 
         # Customizar el estilo de los encabezados y parrafos para todo el documento
         documento_con_estilos_por_defecto = Document()
@@ -90,9 +89,8 @@ class Programa:
         self._documento.add_page_break()
 
     def guardar(self):
-        carpeta_contenedora = Path("./programas")
         ubicacion_final_documento = (
-            carpeta_contenedora
+            ubicacion_carpeta_donde_guardar_programas_generados
             / f"{self._tabla_con_datos_requeridos.cell(1, 1).text.lower().replace(' ', '_')}.docx"
         )
         ubicacion_final_documento.resolve()

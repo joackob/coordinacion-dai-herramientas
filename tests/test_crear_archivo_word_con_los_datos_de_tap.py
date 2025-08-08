@@ -5,6 +5,7 @@ import pytest
 from src.bases_de_datos_en_notion.materias_en_notion import MateriasEnNotion
 from src.bases_de_datos_en_notion.nomina_en_notion import NominaEnNotion
 from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
+from config import ubicacion_carpeta_donde_guardar_programas_generados
 
 
 @pytest.mark.asyncio
@@ -39,9 +40,9 @@ async def test_crear_archivo_word_con_los_datos_de_tap():
 
     taller_de_algoritmos_y_programacion_en_word.guardar()
 
-    carpeta_contenedora = pathlib.Path("./programas")
     ubicacion_final_documento = (
-        carpeta_contenedora / f"{nombre_de_la_materia.lower().replace(' ', '_')}.docx"
+        ubicacion_carpeta_donde_guardar_programas_generados
+        / f"{nombre_de_la_materia.lower().replace(' ', '_')}.docx"
     )
     ubicacion_final_documento.resolve()
     assert ubicacion_final_documento.exists()
