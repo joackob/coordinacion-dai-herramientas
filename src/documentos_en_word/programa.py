@@ -2,7 +2,6 @@ from docx import Document
 from docx.document import Document as DocumentObject
 from docx.table import Table
 from docx.shared import Pt
-from pathlib import Path
 from docx.enum.style import WD_STYLE_TYPE
 from config import ubicacion_de_documento_plantilla
 from config import ubicacion_carpeta_donde_guardar_programas_generados
@@ -20,13 +19,28 @@ class Programa:
         ubicacion_de_documento_plantilla.resolve()
         self._documento = Document(f"{ubicacion_de_documento_plantilla}")
 
+        # Modificar estilos del encamezado de nivel 1
+        estilo_encabezado_1 = self._documento.styles["Heading 1"]
+        estilo_encabezado_1.font.name = "Arial"
+        estilo_encabezado_1.font.size = Pt(14)
+        estilo_encabezado_1.font.bold = True
+        estilo_encabezado_1.paragraph_format.space_before = Pt(14)
+        estilo_encabezado_1.paragraph_format.space_after = Pt(8)
+
+        estilo_parrafo = self._documento.styles["Normal"]
+        estilo_parrafo.font.name = "Arial"
+        estilo_parrafo.font.size = Pt(12)
+        estilo_parrafo.paragraph_format.line_spacing = 1.5
+
         # Agregar estilos que no existen en el documento
         estilo_encabezado_2 = self._documento.styles.add_style(
             "Heading 2", WD_STYLE_TYPE.PARAGRAPH
         )
         estilo_encabezado_2.font.name = "Arial"
-        estilo_encabezado_2.font.size = Pt(13)
+        estilo_encabezado_2.font.size = Pt(14)
         estilo_encabezado_2.font.bold = True
+        estilo_encabezado_2.paragraph_format.space_before = Pt(14)
+        estilo_encabezado_2.paragraph_format.space_after = Pt(8)
 
         estilo_encabezado_3 = self._documento.styles.add_style(
             "Heading 3", WD_STYLE_TYPE.PARAGRAPH
@@ -34,6 +48,9 @@ class Programa:
         estilo_encabezado_3.font.name = "Arial"
         estilo_encabezado_3.font.size = Pt(13)
         estilo_encabezado_3.font.bold = True
+        # estilo_encabezado_2.paragraph_format.line_spacing = 2.0
+        estilo_encabezado_3.paragraph_format.space_before = Pt(14)
+        estilo_encabezado_3.paragraph_format.space_after = Pt(8)
 
         estilo_item_de_lista_desordenada = self._documento.styles.add_style(
             "List Bullet", WD_STYLE_TYPE.PARAGRAPH
@@ -41,6 +58,7 @@ class Programa:
         estilo_item_de_lista_desordenada.font.name = "Arial"
         estilo_item_de_lista_desordenada.font.size = Pt(12)
         estilo_item_de_lista_desordenada.paragraph_format.line_spacing = 1.5
+        estilo_item_de_lista_desordenada.paragraph_format.left_indent = Pt(36)
 
         # Obtener la tabla que contiene los datos requeridos
         self._tabla_con_datos_requeridos = self._documento.tables[0]
@@ -96,5 +114,5 @@ class Programa:
             / f"{self._tabla_con_datos_requeridos.cell(1, 1).text.lower().replace(' ', '_')}.docx"
         )
         ubicacion_final_documento.resolve()
-        self._documento.save(ubicacion_final_documento.__str__())
+        self._documento.save(f"{ubicacion_final_documento}")
         return self

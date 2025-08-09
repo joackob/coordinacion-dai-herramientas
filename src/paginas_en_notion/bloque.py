@@ -23,16 +23,12 @@ class Contenido:
 
 class Encabezado1(Contenido):
     def insertar_en_documento(self, documento: Document):
-        titulo = documento.add_heading(self._contenido_plano, level=1)
-        if titulo.style:
-            titulo.style.font.name = "Arial"
-            titulo.style.font.size = Pt(14)
-            titulo.style.font.bold = True
+        documento.add_heading(self._contenido_plano.upper(), level=1)
 
 
 class Encabezado2(Contenido):
     def insertar_en_documento(self, documento: Document):
-        documento.add_heading(self._contenido_plano, level=2)
+        documento.add_heading(self._contenido_plano.upper(), level=2)
 
 
 class Encabezado3(Contenido):
@@ -42,7 +38,11 @@ class Encabezado3(Contenido):
 
 class Parrafo(Contenido):
     def insertar_en_documento(self, documento: Document):
-        documento.add_paragraph(self._contenido_plano)
+        parrafo = documento.add_paragraph(self._contenido_plano)
+        # if parrafo.style:
+        #     parrafo.style.font.name = "Arial"
+        #     parrafo.style.font.size = Pt(12)
+        #     parrafo.style.paragraph_format.line_spacing = 1.5
 
 
 class ListaConViñetas(Contenido):
