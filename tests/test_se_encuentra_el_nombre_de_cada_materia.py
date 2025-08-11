@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.bases_de_datos_en_notion.materias_en_notion import MateriasEnNotion
+from src.bases_de_datos_en_notion.materias import MateriasEnNotion
 
 
 @pytest.mark.asyncio
@@ -12,7 +12,9 @@ async def test_se_encuentra_tap_entre_las_materias():
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
-        await base_de_datos.consultar_por_materia("Taller de Algoritmos y Programación")
+        await base_de_datos.consultar_por_materia_segun_nombre(
+            "Taller de Algoritmos y Programación"
+        )
     )
 
     # hiper precario

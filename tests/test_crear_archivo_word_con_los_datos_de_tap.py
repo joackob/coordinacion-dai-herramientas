@@ -2,7 +2,7 @@ import os
 import pathlib
 import pytest
 
-from src.bases_de_datos_en_notion.materias_en_notion import MateriasEnNotion
+from src.bases_de_datos_en_notion.materias import MateriasEnNotion
 from src.bases_de_datos_en_notion.nomina_en_notion import NominaEnNotion
 from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
 from config import ubicacion_carpeta_donde_guardar_programas_generados
@@ -23,7 +23,7 @@ async def test_crear_archivo_word_con_los_datos_de_tap():
     )
     nombre_de_la_materia = "Taller de Algoritmos y Programación"
     taller_de_algoritmos_y_programacion_en_notion = (
-        await materias.consultar_por_materia(nombre_de_la_materia)
+        await materias.consultar_por_materia_segun_nombre(nombre_de_la_materia)
     )
 
     await taller_de_algoritmos_y_programacion_en_notion.determinar_profesores_a_cargo(

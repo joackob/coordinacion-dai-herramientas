@@ -16,8 +16,8 @@ class Materia:
     _contenido: list[BloqueDeContenido] = []
 
     def __init__(self, data: Any):
-        propiedades = data["results"][0]["properties"]
-        self._id = data["results"][0]["id"]
+        propiedades = data["properties"]
+        self._id = data["id"]
         self._nombre = propiedades["Nombre"]["formula"]["string"]
         self._anio = propiedades["Año"]["select"]["name"]
         self._carga_horaria = propiedades["Carga Horaria Semanal"]["number"]
