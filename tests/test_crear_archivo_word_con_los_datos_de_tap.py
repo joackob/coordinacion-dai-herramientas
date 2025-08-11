@@ -3,7 +3,7 @@ import pathlib
 import pytest
 
 from src.bases_de_datos_en_notion.materias import MateriasEnNotion
-from src.bases_de_datos_en_notion.nomina_en_notion import NominaEnNotion
+from src.bases_de_datos_en_notion.nomina import Nomina
 from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
 from config import ubicacion_carpeta_donde_guardar_programas_generados
 
@@ -14,7 +14,7 @@ async def test_crear_archivo_word_con_los_datos_de_tap():
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
-    nomina = NominaEnNotion(
+    nomina = Nomina(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("NOMINA_DATABASE_ID")),
     )

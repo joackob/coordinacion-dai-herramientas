@@ -1,7 +1,7 @@
 from typing import Any
 
 from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
-from src.bases_de_datos_en_notion.nomina_en_notion import NominaEnNotion
+from src.bases_de_datos_en_notion.nomina import Nomina
 from src.paginas_en_notion.bloque import BloqueDeContenido
 from src.paginas_en_notion.profesor import Profesor
 from src.documentos_en_word.programa import Programa
@@ -22,7 +22,7 @@ class Materia:
         self._anio = propiedades["Año"]["select"]["name"]
         self._carga_horaria = propiedades["Carga Horaria Semanal"]["number"]
 
-    async def determinar_profesores_a_cargo(self, nomina: NominaEnNotion):
+    async def determinar_profesores_a_cargo(self, nomina: Nomina):
         self._profesores_a_cargo = await nomina.consultar_por_profesores_de_una_materia(
             self._nombre
         )

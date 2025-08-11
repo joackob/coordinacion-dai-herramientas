@@ -8,7 +8,7 @@ from src.paginas_en_notion.profesor import Profesor
 
 
 @dataclass
-class NominaEnNotion:
+class Nomina:
     _database_id: str
     _notion_client: notion.AsyncClient
 
@@ -41,4 +41,6 @@ class NominaEnNotion:
 
         except Exception as e:
             pprint(e)
-            return set()
+            raise Exception(
+                f"Error al consultar la nómina de profesores para la materia {materia}: {e}"
+            )
