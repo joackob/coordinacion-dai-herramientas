@@ -4,11 +4,11 @@ from pprint import pprint
 
 import notion_client as notion
 
-from src.paginas_en_notion.materia import Materia, MateriaVacia
+from src.materias_y_sus_programas.materia import Materia
 
 
 @dataclass
-class MateriasEnNotion:
+class Materias:
     _database_id: str
     _notion_client: notion.AsyncClient
 

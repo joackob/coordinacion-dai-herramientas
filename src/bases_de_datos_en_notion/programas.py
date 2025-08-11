@@ -3,7 +3,7 @@ from pprint import pprint
 
 import notion_client as notion
 
-from src.paginas_en_notion.bloque import BloqueDeContenido
+from src.materias_y_sus_programas.bloque import BloqueDeContenido
 
 
 class Programas:

@@ -4,7 +4,7 @@ from pprint import pprint
 
 import notion_client as notion
 
-from src.paginas_en_notion.profesor import Profesor
+from src.materias_y_sus_programas.profesor import Profesor
 
 
 @dataclass

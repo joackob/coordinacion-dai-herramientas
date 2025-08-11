@@ -1,7 +1,7 @@
 from typing import Any
 from src.documentos_en_word.programa import Programa
 from docx.document import Document
-from docx.shared import Inches, Pt
+from docx.shared import Inches
 
 
 class Contenido:
@@ -38,11 +38,7 @@ class Encabezado3(Contenido):
 
 class Parrafo(Contenido):
     def insertar_en_documento(self, documento: Document):
-        parrafo = documento.add_paragraph(self._contenido_plano)
-        # if parrafo.style:
-        #     parrafo.style.font.name = "Arial"
-        #     parrafo.style.font.size = Pt(12)
-        #     parrafo.style.paragraph_format.line_spacing = 1.5
+        documento.add_paragraph(self._contenido_plano)
 
 
 class ListaConViñetas(Contenido):

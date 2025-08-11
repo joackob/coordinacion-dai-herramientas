@@ -2,12 +2,12 @@ import os
 
 import pytest
 
-from src.bases_de_datos_en_notion.materias import MateriasEnNotion
+from src.bases_de_datos_en_notion.materias import Materias
 
 
 @pytest.mark.asyncio
 async def test_se_encuentra_tap_entre_las_materias():
-    base_de_datos = MateriasEnNotion(
+    base_de_datos = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )

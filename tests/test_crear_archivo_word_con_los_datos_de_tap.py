@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from src.bases_de_datos_en_notion.materias import MateriasEnNotion
+from src.bases_de_datos_en_notion.materias import Materias
 from src.bases_de_datos_en_notion.nomina import Nomina
 from src.bases_de_datos_en_notion.programas import Programas
 from config import ubicacion_carpeta_donde_guardar_programas_generados
@@ -9,7 +9,7 @@ from config import ubicacion_carpeta_donde_guardar_programas_generados
 
 @pytest.mark.asyncio
 async def test_crear_archivo_word_con_los_datos_de_tap():
-    materias = MateriasEnNotion(
+    materias = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )

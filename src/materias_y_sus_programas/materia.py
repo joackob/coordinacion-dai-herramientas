@@ -2,8 +2,8 @@ from typing import Any
 
 from src.bases_de_datos_en_notion.programas import Programas
 from src.bases_de_datos_en_notion.nomina import Nomina
-from src.paginas_en_notion.bloque import BloqueDeContenido
-from src.paginas_en_notion.profesor import Profesor
+from src.materias_y_sus_programas.bloque import BloqueDeContenido
+from src.materias_y_sus_programas.profesor import Profesor
 from src.documentos_en_word.programa import Programa
 
 
@@ -49,11 +49,3 @@ class Materia:
             bloque.insertar_en_documento(documento)
 
         return documento
-
-
-class MateriaVacia(Materia):
-    def __init__(self):
-        self._id = ""
-        self._anio = ""
-        self._nombre = ""
-        self._carga_horaria = 0
