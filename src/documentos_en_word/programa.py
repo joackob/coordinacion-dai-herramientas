@@ -1,5 +1,6 @@
 from docx import Document
 from docx.document import Document as DocumentObject
+from docx.styles.style import ParagraphStyle
 from docx.table import Table
 from docx.shared import Pt
 from docx.enum.style import WD_STYLE_TYPE
@@ -21,44 +22,48 @@ class Programa:
 
         # Modificar estilos del encamezado de nivel 1
         estilo_encabezado_1 = self._documento.styles["Heading 1"]
-        estilo_encabezado_1.font.name = "Arial"
-        estilo_encabezado_1.font.size = Pt(14)
-        estilo_encabezado_1.font.bold = True
-        estilo_encabezado_1.paragraph_format.space_before = Pt(14)
-        estilo_encabezado_1.paragraph_format.space_after = Pt(8)
+        if isinstance(estilo_encabezado_1, ParagraphStyle):
+            estilo_encabezado_1.font.name = "Arial"
+            estilo_encabezado_1.font.size = Pt(14)
+            estilo_encabezado_1.font.bold = True
+            estilo_encabezado_1.paragraph_format.space_before = Pt(14)
+            estilo_encabezado_1.paragraph_format.space_after = Pt(8)
 
         estilo_parrafo = self._documento.styles["Normal"]
-        estilo_parrafo.font.name = "Arial"
-        estilo_parrafo.font.size = Pt(12)
-        estilo_parrafo.paragraph_format.line_spacing = 1.5
+        if isinstance(estilo_parrafo, ParagraphStyle):
+            estilo_parrafo.font.name = "Arial"
+            estilo_parrafo.font.size = Pt(12)
+            estilo_parrafo.paragraph_format.line_spacing = 1.5
 
         # Agregar estilos que no existen en el documento
         estilo_encabezado_2 = self._documento.styles.add_style(
             "Heading 2", WD_STYLE_TYPE.PARAGRAPH
         )
-        estilo_encabezado_2.font.name = "Arial"
-        estilo_encabezado_2.font.size = Pt(14)
-        estilo_encabezado_2.font.bold = True
-        estilo_encabezado_2.paragraph_format.space_before = Pt(14)
-        estilo_encabezado_2.paragraph_format.space_after = Pt(8)
+        if isinstance(estilo_encabezado_2, ParagraphStyle):
+            estilo_encabezado_2.font.name = "Arial"
+            estilo_encabezado_2.font.size = Pt(14)
+            estilo_encabezado_2.font.bold = True
+            estilo_encabezado_2.paragraph_format.space_before = Pt(14)
+            estilo_encabezado_2.paragraph_format.space_after = Pt(8)
 
         estilo_encabezado_3 = self._documento.styles.add_style(
             "Heading 3", WD_STYLE_TYPE.PARAGRAPH
         )
-        estilo_encabezado_3.font.name = "Arial"
-        estilo_encabezado_3.font.size = Pt(13)
-        estilo_encabezado_3.font.bold = True
-        # estilo_encabezado_2.paragraph_format.line_spacing = 2.0
-        estilo_encabezado_3.paragraph_format.space_before = Pt(14)
-        estilo_encabezado_3.paragraph_format.space_after = Pt(8)
+        if isinstance(estilo_encabezado_3, ParagraphStyle):
+            estilo_encabezado_3.font.name = "Arial"
+            estilo_encabezado_3.font.size = Pt(13)
+            estilo_encabezado_3.font.bold = True
+            estilo_encabezado_3.paragraph_format.space_before = Pt(14)
+            estilo_encabezado_3.paragraph_format.space_after = Pt(8)
 
         estilo_item_de_lista_desordenada = self._documento.styles.add_style(
             "List Bullet", WD_STYLE_TYPE.PARAGRAPH
         )
-        estilo_item_de_lista_desordenada.font.name = "Arial"
-        estilo_item_de_lista_desordenada.font.size = Pt(12)
-        estilo_item_de_lista_desordenada.paragraph_format.line_spacing = 1.5
-        estilo_item_de_lista_desordenada.paragraph_format.left_indent = Pt(36)
+        if isinstance(estilo_item_de_lista_desordenada, ParagraphStyle):
+            estilo_item_de_lista_desordenada.font.name = "Arial"
+            estilo_item_de_lista_desordenada.font.size = Pt(12)
+            estilo_item_de_lista_desordenada.paragraph_format.line_spacing = 1.5
+            estilo_item_de_lista_desordenada.paragraph_format.left_indent = Pt(36)
 
         # Obtener la tabla que contiene los datos requeridos
         self._tabla_con_datos_requeridos = self._documento.tables[0]
