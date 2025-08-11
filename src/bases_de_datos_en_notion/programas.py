@@ -6,7 +6,7 @@ import notion_client as notion
 from src.paginas_en_notion.bloque import BloqueDeContenido
 
 
-class ProgramasEnNotion:
+class Programas:
     _notion_client: notion.AsyncClient
 
     def __init__(self, notion_api_key: str):
@@ -24,4 +24,6 @@ class ProgramasEnNotion:
             return [BloqueDeContenido(bloque) for bloque in respuesta["results"]]
         except Exception as e:
             pprint(e)
-            return []
+            raise Exception(
+                f"No se pudo consultar el programa de la materia con id {materia_id}"
+            )

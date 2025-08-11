@@ -3,7 +3,7 @@ import os
 import pytest
 
 from src.bases_de_datos_en_notion.materias import MateriasEnNotion
-from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
+from src.bases_de_datos_en_notion.programas import Programas
 
 
 @pytest.mark.asyncio
@@ -12,7 +12,7 @@ async def test_se_pueden_observar_los_titulos_del_programa_de_tap():
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
-    programas = ProgramasEnNotion(
+    programas = Programas(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (

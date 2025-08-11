@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.bases_de_datos_en_notion.programas_en_notion import ProgramasEnNotion
+from src.bases_de_datos_en_notion.programas import Programas
 from src.bases_de_datos_en_notion.nomina import Nomina
 from src.paginas_en_notion.bloque import BloqueDeContenido
 from src.paginas_en_notion.profesor import Profesor
@@ -28,7 +28,7 @@ class Materia:
         )
         return self
 
-    async def descargar_contenido_asociado(self, programas: ProgramasEnNotion):
+    async def descargar_contenido_asociado(self, programas: Programas):
         self._contenido = await programas.consultar_programa_por_materia_id(self._id)
         return self
 
