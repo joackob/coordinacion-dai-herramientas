@@ -18,6 +18,7 @@ pytest-asyncio = "*"
 [scripts]
 tests = "pytest tests/"
 cargar_estudiantes_abp_5to = "python -m utils.cargar_estudiantes_abp_5to"
+descargar_programas_dai = "python -m utils.descargar_programas_dai"
 
 [requires]
 python_version = "3.12"

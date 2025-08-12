@@ -16,7 +16,7 @@ async def test_se_pueden_observar_los_titulos_del_programa_de_tap():
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
-        await base_de_datos.consultar_por_materia_segun_nombre(
+        await base_de_datos.intentar_consultar_por_materia_segun_nombre(
             "Taller de Algoritmos y Programación"
         )
     )

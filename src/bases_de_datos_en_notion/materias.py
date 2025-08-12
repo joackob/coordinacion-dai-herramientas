@@ -1,4 +1,4 @@
-from pprint import pprint
+import logging
 
 
 from src.materias_y_sus_programas.materia import Materia
@@ -7,7 +7,7 @@ from src.bases_de_datos_en_notion.bdd import BDD
 
 class Materias(BDD):
 
-    async def consultar_por_materia_segun_nombre(self, nombre: str) -> Materia:
+    async def intentar_consultar_por_materia_segun_nombre(self, nombre: str) -> Materia:
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
@@ -21,7 +21,7 @@ class Materias(BDD):
             materia = Materia(respuesta["results"][0])
             return materia
         except Exception as e:
-            pprint(e)
+            logging.error(e)
             raise Exception(
                 f"Error al consultar la materia '{nombre}'. Verifica tu conexión a Notion."
             )
@@ -40,7 +40,5 @@ class Materias(BDD):
             materias = [Materia(materia) for materia in respuesta["results"]]
             return materias
         except Exception as e:
-            pprint(e)
-            raise Exception(
-                "Error al consultar las materias del área DAI. Verifica tu conexión a Notion."
-            )
+            logging.error(e)
+            return []

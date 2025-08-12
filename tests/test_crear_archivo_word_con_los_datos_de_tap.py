@@ -22,7 +22,7 @@ async def test_crear_archivo_word_con_los_datos_de_tap():
     )
     nombre_de_la_materia = "Taller de Algoritmos y Programación"
     taller_de_algoritmos_y_programacion_en_notion = (
-        await materias.consultar_por_materia_segun_nombre(nombre_de_la_materia)
+        await materias.intentar_consultar_por_materia_segun_nombre(nombre_de_la_materia)
     )
 
     await taller_de_algoritmos_y_programacion_en_notion.determinar_profesores_a_cargo(

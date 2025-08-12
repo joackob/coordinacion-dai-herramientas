@@ -12,7 +12,7 @@ async def test_se_encuentra_tap_entre_las_materias():
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
-        await base_de_datos.consultar_por_materia_segun_nombre(
+        await base_de_datos.intentar_consultar_por_materia_segun_nombre(
             "Taller de Algoritmos y Programación"
         )
     )

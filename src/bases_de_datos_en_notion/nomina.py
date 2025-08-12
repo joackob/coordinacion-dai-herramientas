@@ -1,4 +1,4 @@
-from pprint import pprint
+import logging
 
 
 from src.bases_de_datos_en_notion.bdd import BDD
@@ -29,7 +29,5 @@ class Nomina(BDD):
             return set([Profesor(dato) for dato in respuesta["results"]])
 
         except Exception as e:
-            pprint(e)
-            raise Exception(
-                f"Error al consultar la nómina de profesores para la materia {materia}: {e}"
-            )
+            logging.error(e)
+            return set()

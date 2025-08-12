@@ -32,7 +32,7 @@ class Materia:
         self._contenido = await programas.consultar_programa_por_materia_id(self._id)
         return self
 
-    def crear_documento_para_el_programa(self):
+    def crear_documento_para_el_programa(self) -> Programa:
         documento = Programa(
             asignatura=self._nombre,
             anio_ciclo=self._anio,

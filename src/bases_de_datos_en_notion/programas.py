@@ -1,4 +1,4 @@
-from pprint import pprint
+import logging
 
 
 from src.bases_de_datos_en_notion.bdd import API
@@ -16,7 +16,5 @@ class Programas(API):
             )
             return [BloqueDeContenido(bloque) for bloque in respuesta["results"]]
         except Exception as e:
-            pprint(e)
-            raise Exception(
-                f"No se pudo consultar el programa de la materia con id {materia_id}"
-            )
+            logging.error(e)
+            return []
