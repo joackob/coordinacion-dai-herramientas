@@ -1,18 +1,11 @@
-import logging
 from pprint import pprint
 
-import notion_client as notion
 
+from src.bases_de_datos_en_notion.bdd import API
 from src.materias_y_sus_programas.bloque import BloqueDeContenido
 
 
-class Programas:
-    _notion_client: notion.AsyncClient
-
-    def __init__(self, notion_api_key: str):
-        self._notion_client = notion.AsyncClient(
-            auth=notion_api_key, log_level=logging.DEBUG
-        )
+class Programas(API):
 
     async def consultar_programa_por_materia_id(
         self, materia_id: str
