@@ -14,9 +14,11 @@ pydantic = "*"
 [dev-packages]
 pytest = "*"
 pytest-asyncio = "*"
+black = "*"
 
 [scripts]
 tests = "pytest tests/"
+format = "black ."
 cargar_estudiantes_abp_5to = "python -m utils.cargar_estudiantes_abp_5to"
 descargar_programas_dai = "python -m utils.descargar_programas_dai"
 
