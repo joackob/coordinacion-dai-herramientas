@@ -42,3 +42,26 @@ class Materias(BDD):
         except Exception as e:
             logging.error(e)
             return []
+
+    async def consultar_por_materias_del_area_pdc(self) -> list[Materia]:
+        try:
+            respuesta = await self._notion_client.databases.query(
+                **{
+                    "database_id": self._database_id,
+                    "filter": {
+                        "property": "Área",
+                        "select": {"equals": "Procesamiento Digital y Comunicaciones"},
+                    },
+                }
+            )
+            materias = [Materia(materia) for materia in respuesta["results"]]
+            return materias
+        except Exception as e:
+            logging.error(e)
+            return []
+
+    async def consultar_por_materias_de_tics(self) -> list[Materia]:
+        return (
+            await self.consultar_por_materias_del_area_dai()
+            + await self.consultar_por_materias_del_area_pdc()
+        )
