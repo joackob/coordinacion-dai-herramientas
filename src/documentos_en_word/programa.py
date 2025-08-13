@@ -14,8 +14,17 @@ class Programa:
     _jefe_de_departamento: str = "Andrés Navarro"
     _documento: DocumentObject
     _tabla_con_datos_requeridos: Table
+    _anio_ciclo: dict[str, str] = dict(
+        {
+            "3ro": "3ro - Ciclo Intermedio",
+            "4to": "4to - Ciclo Intermedio",
+            "5to": "5to - Ciclo Superior",
+            "6to": "6to - Ciclo Superior",
+        }
+    )
 
-    def __init__(self, asignatura: str, anio_ciclo: str, carga_horaria: int):
+    def __init__(self, asignatura: str, anio: str, carga_horaria: int):
+        #
         # Abrir el documento de Word que servirá como plantilla
         ubicacion_de_documento_plantilla.resolve()
         self._documento = Document(f"{ubicacion_de_documento_plantilla}")
@@ -74,7 +83,7 @@ class Programa:
         asignatura_en_tabla.text = asignatura
         # Año/Ciclo
         anio_ciclo_en_tabla = self._tabla_con_datos_requeridos.cell(2, 1)
-        anio_ciclo_en_tabla.text = anio_ciclo
+        anio_ciclo_en_tabla.text = self._anio_ciclo[anio]
         # Campo de formación
         campo_de_formacion_en_tabla = self._tabla_con_datos_requeridos.cell(3, 1)
         campo_de_formacion_en_tabla.text = self._campo_de_formacion

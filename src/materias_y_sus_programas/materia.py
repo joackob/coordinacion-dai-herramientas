@@ -35,7 +35,7 @@ class Materia:
     def crear_documento_para_el_programa(self) -> Programa:
         documento = Programa(
             asignatura=self._nombre,
-            anio_ciclo=self._anio,
+            anio=self._anio,
             carga_horaria=self._carga_horaria,
         )
 
