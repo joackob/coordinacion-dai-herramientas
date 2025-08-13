@@ -4,7 +4,6 @@ import notion_client as notion
 
 
 class API:
-    _notion_client: notion.AsyncClient
 
     def __init__(self, notion_api_key: str, log_level=logging.DEBUG):
         self._notion_client = notion.AsyncClient(
@@ -13,7 +12,6 @@ class API:
 
 
 class BDD(API):
-    _database_id: str
 
     def __init__(self, notion_api_key: str, database_id: str, log_level=logging.DEBUG):
         self._database_id = database_id

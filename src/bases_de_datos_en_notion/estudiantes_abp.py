@@ -39,7 +39,7 @@ class Estudiantes(BDD):
                 },
                 icon={
                     "type": "emoji",
-                    "emoji": f"{random.choice(self._iconos)}",
+                    "emoji": f"{random.choice(Estudiantes._iconos)}",
                 },
             )
             return self

@@ -5,7 +5,6 @@ from docx.shared import Inches
 
 
 class Contenido:
-    _contenido_plano: str
 
     def __init__(self, data: Any):
         if "rich_text" in data and data["rich_text"]:
@@ -53,7 +52,6 @@ class ListaNumerada(Contenido):
 
 
 class ListaConToDo(Contenido):
-    checked: bool
 
     def __init__(self, data: Any):
         super().__init__(data)
@@ -79,11 +77,10 @@ class Cite(Contenido):  # quote
 
 
 class Codigo(Contenido):
-    lenguaje: str
 
     def __init__(self, data: Any):
         super().__init__(data)
-        self.lenguaje = data.get("language", "")
+        self._lenguaje = data.get("language", "")
 
     def insertar_en_documento(self, documento: Document):
         # Simular bloque de código con fuente monoespaciada
@@ -105,34 +102,28 @@ class Separador(Contenido):  # divider
 
 
 class BloqueDeContenido:
-    _contenido: Contenido
+    _fabrica_de_contenido = dict(
+        {
+            "paragraph": lambda bloque: Parrafo(bloque),
+            "heading_1": lambda bloque: Encabezado1(bloque),
+            "heading_2": lambda bloque: Encabezado2(bloque),
+            "heading_3": lambda bloque: Encabezado3(bloque),
+            "bulleted_list_item": lambda bloque: ListaConViñetas(bloque),
+            "numbered_list_item": lambda bloque: ListaNumerada(bloque),
+            "to_do": lambda bloque: ListaConToDo(bloque),
+            "callout": lambda bloque: Llamada(bloque),
+            "quote": lambda bloque: Cite(bloque),
+            "code": lambda bloque: Codigo(bloque),
+            "divider": lambda bloque: Separador(bloque),
+        }
+    )
 
     def __init__(self, data: Any):
         tipo = data["type"]
         bloque = data[tipo]
 
-        if tipo == "paragraph":
-            self._contenido = Parrafo(bloque)
-        elif tipo == "heading_1":
-            self._contenido = Encabezado1(bloque)
-        elif tipo == "heading_2":
-            self._contenido = Encabezado2(bloque)
-        elif tipo == "heading_3":
-            self._contenido = Encabezado3(bloque)
-        elif tipo == "bulleted_list_item":
-            self._contenido = ListaConViñetas(bloque)
-        elif tipo == "numbered_list_item":
-            self._contenido = ListaNumerada(bloque)
-        elif tipo == "to_do":
-            self._contenido = ListaConToDo(bloque)
-        elif tipo == "callout":
-            self._contenido = Llamada(bloque)
-        elif tipo == "quote":
-            self._contenido = Cite(bloque)
-        elif tipo == "code":
-            self._contenido = Codigo(bloque)
-        elif tipo == "divider":
-            self._contenido = Separador(bloque)
+        if tipo in BloqueDeContenido._fabrica_de_contenido:
+            self._contenido = BloqueDeContenido._fabrica_de_contenido[tipo](bloque)
         else:
             self._contenido = Contenido(bloque)
 

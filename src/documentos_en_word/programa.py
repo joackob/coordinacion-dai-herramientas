@@ -1,7 +1,5 @@
 from docx import Document
-from docx.document import Document as DocumentObject
 from docx.styles.style import ParagraphStyle
-from docx.table import Table
 from docx.shared import Pt
 from docx.enum.style import WD_STYLE_TYPE
 from config import ubicacion_de_documento_plantilla
@@ -9,11 +7,8 @@ from config import ubicacion_carpeta_donde_guardar_programas_generados
 
 
 class Programa:
-    _docentes: list[str] = []
     _campo_de_formacion: str = "Técnico Especifico - Especialidad TICs"
     _jefe_de_departamento: str = "Andrés Navarro"
-    _documento: DocumentObject
-    _tabla_con_datos_requeridos: Table
     _anio_ciclo: dict[str, str] = dict(
         {
             "3ro": "3ro - Ciclo Intermedio",
@@ -24,7 +19,7 @@ class Programa:
     )
 
     def __init__(self, asignatura: str, anio: str, carga_horaria: int):
-        #
+        self._docentes = list[str]()
         # Abrir el documento de Word que servirá como plantilla
         ubicacion_de_documento_plantilla.resolve()
         self._documento = Document(f"{ubicacion_de_documento_plantilla}")
@@ -83,16 +78,16 @@ class Programa:
         asignatura_en_tabla.text = asignatura
         # Año/Ciclo
         anio_ciclo_en_tabla = self._tabla_con_datos_requeridos.cell(2, 1)
-        anio_ciclo_en_tabla.text = self._anio_ciclo[anio]
+        anio_ciclo_en_tabla.text = Programa._anio_ciclo[anio]
         # Campo de formación
         campo_de_formacion_en_tabla = self._tabla_con_datos_requeridos.cell(3, 1)
-        campo_de_formacion_en_tabla.text = self._campo_de_formacion
+        campo_de_formacion_en_tabla.text = Programa._campo_de_formacion
         # Carga horaria
         carga_horaria_en_tabla = self._tabla_con_datos_requeridos.cell(4, 1)
         carga_horaria_en_tabla.text = f"{carga_horaria} horas cátedra"
         # Jefe de departamento
         jefe_de_departamento_en_tabla = self._tabla_con_datos_requeridos.cell(5, 1)
-        jefe_de_departamento_en_tabla.text = self._jefe_de_departamento
+        jefe_de_departamento_en_tabla.text = Programa._jefe_de_departamento
         # Dar estilos requeridos a la celdas que fueron modificadas
         for celda in [
             asignatura_en_tabla,

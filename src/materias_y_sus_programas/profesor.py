@@ -2,8 +2,6 @@ from typing import Any
 
 
 class Profesor:
-    _nombre: str
-    _apellido: str
 
     def __init__(self, data: Any):
         propiedades = data["properties"]

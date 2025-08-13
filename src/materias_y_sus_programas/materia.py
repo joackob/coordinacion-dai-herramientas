@@ -8,12 +8,6 @@ from src.documentos_en_word.programa import Programa
 
 
 class Materia:
-    _id: str
-    _nombre: str
-    _anio: str
-    _carga_horaria: int
-    _profesores_a_cargo: set[Profesor] = set()
-    _contenido: list[BloqueDeContenido] = []
 
     def __init__(self, data: Any):
         propiedades = data["properties"]
@@ -21,6 +15,8 @@ class Materia:
         self._nombre = propiedades["Nombre"]["formula"]["string"]
         self._anio = propiedades["Año"]["select"]["name"]
         self._carga_horaria = propiedades["Carga Horaria Semanal"]["number"]
+        self._profesores_a_cargo: set[Profesor] = set()
+        self._contenido: list[BloqueDeContenido] = []
 
     async def determinar_profesores_a_cargo(self, nomina: Nomina):
         self._profesores_a_cargo = await nomina.consultar_por_profesores_de_una_materia(
