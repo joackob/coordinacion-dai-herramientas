@@ -26,14 +26,14 @@ class Materias(BDD):
                 f"Error al consultar la materia '{nombre}'. Verifica tu conexión a Notion."
             )
 
-    async def consultar_por_materias_del_area_dai(self) -> list[Materia]:
+    async def consultar_por_materias_por_area(self, area: str) -> list[Materia]:
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
                     "database_id": self._database_id,
                     "filter": {
                         "property": "Área",
-                        "select": {"equals": "Diseño de Aplicaciones Informáticas"},
+                        "select": {"equals": area},
                     },
                 }
             )
@@ -43,22 +43,15 @@ class Materias(BDD):
             logging.error(e)
             return []
 
+    async def consultar_por_materias_del_area_dai(self) -> list[Materia]:
+        return await self.consultar_por_materias_por_area(
+            "Diseño de Aplicaciones Informáticas"
+        )
+
     async def consultar_por_materias_del_area_pdc(self) -> list[Materia]:
-        try:
-            respuesta = await self._notion_client.databases.query(
-                **{
-                    "database_id": self._database_id,
-                    "filter": {
-                        "property": "Área",
-                        "select": {"equals": "Procesamiento Digital y Comunicaciones"},
-                    },
-                }
-            )
-            materias = [Materia(materia) for materia in respuesta["results"]]
-            return materias
-        except Exception as e:
-            logging.error(e)
-            return []
+        return await self.consultar_por_materias_por_area(
+            "Procesamiento Digital y Comunicaciones"
+        )
 
     async def consultar_por_materias_de_tics(self) -> list[Materia]:
         return (
