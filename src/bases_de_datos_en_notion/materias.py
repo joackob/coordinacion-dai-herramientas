@@ -26,7 +26,7 @@ class Materias(BDD):
                 f"Error al consultar la materia '{nombre}'. Verifica tu conexión a Notion."
             )
 
-    async def consultar_por_materias_por_area(self, area: str) -> list[Materia]:
+    async def consultar_materias_por_area(self, area: str) -> list[Materia]:
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
@@ -44,12 +44,12 @@ class Materias(BDD):
             return []
 
     async def consultar_por_materias_del_area_dai(self) -> list[Materia]:
-        return await self.consultar_por_materias_por_area(
+        return await self.consultar_materias_por_area(
             "Diseño de Aplicaciones Informáticas"
         )
 
     async def consultar_por_materias_del_area_pdc(self) -> list[Materia]:
-        return await self.consultar_por_materias_por_area(
+        return await self.consultar_materias_por_area(
             "Procesamiento Digital y Comunicaciones"
         )
 
