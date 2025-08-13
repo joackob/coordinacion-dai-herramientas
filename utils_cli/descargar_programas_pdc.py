@@ -8,7 +8,7 @@ from src.bases_de_datos_en_notion.nomina import Nomina
 from src.bases_de_datos_en_notion.programas import Programas
 
 
-async def descargar_programas_tics():
+async def descargar_programas_pdc():
     materias = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
@@ -24,8 +24,10 @@ async def descargar_programas_tics():
         log_level=logging.ERROR,
     )
 
-    materias_de_tics = await materias.consultar_por_materias_de_tics()
-    for materia in tqdm.tqdm(materias_de_tics, desc="Descargando programas de TICs"):
+    materias_del_area_dai = await materias.consultar_por_materias_del_area_pdc()
+    for materia in tqdm.tqdm(
+        materias_del_area_dai, desc="Descargando programas de PDC"
+    ):
         await materia.determinar_profesores_a_cargo(nomina)
         await materia.descargar_contenido_asociado(programas)
         documento = materia.crear_documento_para_el_programa()
@@ -33,7 +35,7 @@ async def descargar_programas_tics():
 
 
 def main():
-    asyncio.run(descargar_programas_tics())
+    asyncio.run(descargar_programas_pdc())
 
 
 if __name__ == "__main__":

@@ -21,6 +21,8 @@ tests = "pytest tests/"
 format = "black ."
 cargar_estudiantes_abp_5to = "python -m utils.cargar_estudiantes_abp_5to"
 descargar_programas_dai = "python -m utils.descargar_programas_dai"
+descargar_programas_pdc = "python -m utils.descargar_programas_pdc"
+descargar_programas_tics = "python -m utils.descargar_programas_tics"
 
 [requires]
 python_version = "3.12"
