@@ -45,6 +45,7 @@ Estas herramientas se ejecutan a través de comandos básicos utilizando `pipenv
 
 - **pipenv**  
   Instala `pipenv` con el siguiente comando:
+
   ```bash
   pip install --user pipenv
   ```
@@ -54,10 +55,25 @@ Estas herramientas se ejecutan a través de comandos básicos utilizando `pipenv
 1. Clona el repositorio o descarga el código fuente.
 2. Navega a la carpeta del proyecto en tu terminal.
 3. Ejecuta:
+
    ```bash
    pipenv install -d
    ```
+
    Esto instalará todas las dependencias y herramientas necesarias para el desarrollo y ejecución.
+
+---
+
+## Variables de entorno
+
+Para el correcto funcionamiento de las herramientas, es necesario definir ciertas variables de entorno, como credenciales y tokens de acceso para la integración con servicios externos (por ejemplo, Notion).  
+Estas variables están especificadas en el archivo `.env.example` incluido en el repositorio.
+
+- **¿Qué hacer?**  
+  Copia el archivo `.env.example` a un nuevo archivo llamado `.env` y completa los valores requeridos.
+
+- **¿Cómo obtener los valores?**  
+  Si necesitas alguna de las variables, puedes solicitarlas al autor del repositorio.
 
 ---
 
@@ -93,5 +109,5 @@ Este proyecto se distribuye bajo licencia MIT.
 
 ### Documentación utilizada para este proyecto
 
-- https://developers.notion.com/reference/post-database-query
-- https://developers.notion.com/reference/post-page
+- <https://developers.notion.com/reference/post-database-query>
+- <https://developers.notion.com/reference/post-page>
