@@ -59,13 +59,13 @@ async def intentar_cargar_estudiantes_abp_5to():
             _estudiantes_comision_d,
             desc="Cargando estudiantes 5to D",
         ):
-            await estudiantes.intentar_cargar_estudiante(estudiante, comision="5to D")
+            await estudiantes.cargar_estudiante(estudiante, comision="5to D")
 
         for estudiante in tqdm.tqdm(
             _estudiantes_comision_b,
             desc="Cargando estudiantes 5to B",
         ):
-            await estudiantes.intentar_cargar_estudiante(estudiante, comision="5to B")
+            await estudiantes.cargar_estudiante(estudiante, comision="5to B")
 
     except Exception as e:
         logging.error(f"Error: {e}")
