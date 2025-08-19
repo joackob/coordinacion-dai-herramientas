@@ -42,7 +42,7 @@ class Backlog(BDD):
     ) -> HistoriaDeUsuario:
         try:
             await self._notion_client.pages.create(
-                parents={"database_id": self._database_id},
+                parent={"database_id": self._database_id},
                 properties={
                     "Name": {"title": [{"text": {"content": f"{titulo}"}}]},
                 },
