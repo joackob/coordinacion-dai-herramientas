@@ -1,6 +1,15 @@
 import logging
 import random
+
+from dataclasses import dataclass
+
 from src.bases_de_datos_en_notion.bdd import BDD
+
+
+@dataclass
+class Estudiante:
+    nombre: str
+    cargada: bool
 
 
 class Estudiantes(BDD):
@@ -27,7 +36,7 @@ class Estudiantes(BDD):
         "⚽",
     ]
 
-    async def intentar_cargar_estudiante(self, nombre_completo: str, comision: str):
+    async def cargar_estudiante(self, nombre_completo: str, comision: str):
         try:
             await self._notion_client.pages.create(
                 parent={"database_id": self._database_id},
@@ -42,7 +51,7 @@ class Estudiantes(BDD):
                     "emoji": f"{random.choice(Estudiantes._iconos)}",
                 },
             )
-            return self
+            return Estudiante(nombre=nombre_completo, cargada=True)
         except Exception as e:
             logging.error(e)
-            raise Exception(f"Error al crear la página para {nombre_completo}")
+            return Estudiante(nombre=nombre_completo, cargada=False)
