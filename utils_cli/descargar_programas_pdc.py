@@ -12,11 +12,13 @@ async def descargar_programas_pdc():
     materias = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
+        data_source_id=str(os.getenv("MATERIAS_DATA_SOURCE_ID")),
         log_level=logging.ERROR,
     )
     nomina = Nomina(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("NOMINA_DATABASE_ID")),
+        data_source_id=str(os.getenv("NOMINA_DATA_SOURCE_ID")),
         log_level=logging.ERROR,
     )
     programas = Programas(

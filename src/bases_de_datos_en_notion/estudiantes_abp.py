@@ -39,7 +39,8 @@ class Estudiantes(BDD):
     async def cargar_estudiante(self, nombre_completo: str, comision: str):
         try:
             await self._notion_client.pages.create(
-                parent={"database_id": self._database_id},
+                # parent={"database_id": self._database_id},
+                **self._certificados_para_crear_paginas(),
                 properties={
                     "Name": {  # Asegúrate de que "Name" coincida con el nombre de la propiedad principal en tu base de datos
                         "title": [{"text": {"content": f"{nombre_completo}"}}]

@@ -13,7 +13,7 @@ class Nomina(BDD):
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
-                    "database_id": self._database_id,
+                    **self._certificados_para_consultas(),
                     "filter": {
                         "and": [
                             {
@@ -26,8 +26,8 @@ class Nomina(BDD):
                 }
             )
 
-            return set([Profesor(dato) for dato in respuesta["results"]])
-
+            profesores = set([Profesor(dato) for dato in respuesta["results"]])
+            return profesores
         except Exception as e:
             logging.error(e)
             return set()

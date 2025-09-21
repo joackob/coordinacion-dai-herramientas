@@ -37,7 +37,8 @@ async def cargar_historias():
     try:
         backlog = Backlog(
             notion_api_key=str(os.getenv("NOTION_API_KEY")),
-            database_id="2540852ddb7e80c383c8eba65586de71",
+            database_id=str(os.getenv("BACKLOG_DATABASE_ID")),
+            data_source_id=str(os.getenv("BACKLOG_DATA_SOURCE_ID")),
             log_level=logging.ERROR,
         )
 

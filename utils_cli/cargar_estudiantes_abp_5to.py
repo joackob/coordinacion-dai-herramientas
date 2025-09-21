@@ -52,6 +52,7 @@ async def intentar_cargar_estudiantes_abp_5to():
         estudiantes = Estudiantes(
             notion_api_key=str(os.getenv("NOTION_API_KEY")),
             database_id=str(os.getenv("ESTUDIANTES_ABP_5_DATABASE_ID")),
+            data_source_id=str(os.getenv("ESTUDIANTES_DATA_SOURCE_ID")),
             log_level=logging.ERROR,
         )
 

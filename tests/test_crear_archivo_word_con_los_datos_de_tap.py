@@ -12,10 +12,12 @@ async def test_crear_archivo_word_con_los_datos_de_tap():
     materias = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
+        data_source_id=str(os.getenv("MATERIAS_DATA_SOURCE_ID")),
     )
     nomina = Nomina(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("NOMINA_DATABASE_ID")),
+        data_source_id=str(os.getenv("NOMINA_DATA_SOURCE_ID")),
     )
     programas = Programas(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),

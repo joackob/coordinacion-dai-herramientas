@@ -26,4 +26,4 @@ descargar_programas_pdc = "python -m utils_cli.descargar_programas_pdc"
 descargar_programas_tics = "python -m utils_cli.descargar_programas_tics"
 
 [requires]
-python_version = "3.12"
+python_version = "3"

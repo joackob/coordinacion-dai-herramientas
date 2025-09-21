@@ -11,7 +11,7 @@ class Materias(BDD):
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
-                    "database_id": self._database_id,
+                    **self._certificados_para_consultas(),
                     "filter": {
                         "property": "Nombre",
                         "rich_text": {"contains": nombre},
@@ -30,7 +30,8 @@ class Materias(BDD):
         try:
             respuesta = await self._notion_client.databases.query(
                 **{
-                    "database_id": self._database_id,
+                    # "database_id": self._database_id,
+                    **self._certificados_para_consultas(),
                     "filter": {
                         "property": "Área",
                         "select": {"equals": area},

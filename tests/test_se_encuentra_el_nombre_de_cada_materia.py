@@ -10,6 +10,7 @@ async def test_se_encuentra_tap_entre_las_materias():
     base_de_datos = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
+        data_source_id=str(os.getenv("MATERIAS_DATA_SOURCE_ID")),
     )
     taller_de_algoritmos_y_programacion_en_notion = (
         await base_de_datos.intentar_consultar_por_materia_segun_nombre(

@@ -11,6 +11,7 @@ async def test_se_pueden_observar_los_titulos_del_programa_de_tap():
     base_de_datos = Materias(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
         database_id=str(os.getenv("MATERIAS_DATABASE_ID")),
+        data_source_id=str(os.getenv("MATERIAS_DATA_SOURCE_ID")),
     )
     programas = Programas(
         notion_api_key=str(os.getenv("NOTION_API_KEY")),
