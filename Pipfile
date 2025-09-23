@@ -10,6 +10,7 @@ pillow = "*"
 click = "*"
 tqdm = "*"
 pydantic = "*"
+pyrefly = "*"
 
 [dev-packages]
 pytest = "*"

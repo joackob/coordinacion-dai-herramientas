@@ -1,4 +1,5 @@
 from docx import Document
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.styles.style import ParagraphStyle
 from docx.shared import Pt
 from docx.enum.style import WD_STYLE_TYPE
@@ -7,7 +8,6 @@ from config import ubicacion_carpeta_donde_guardar_programas_generados
 
 
 class Programa:
-    _campo_de_formacion: str = "Técnico Especifico - Especialidad TICs"
     _jefe_de_departamento: str = "Andrés Navarro"
     _anio_ciclo: dict[str, str] = dict(
         {
@@ -18,7 +18,7 @@ class Programa:
         }
     )
 
-    def __init__(self, asignatura: str, anio: str, carga_horaria: int):
+    def __init__(self, asignatura: str, anio: str, carga_horaria: int, area: str):
         self._docentes = list[str]()
         # Abrir el documento de Word que servirá como plantilla
         ubicacion_de_documento_plantilla.resolve()
@@ -81,7 +81,7 @@ class Programa:
         anio_ciclo_en_tabla.text = Programa._anio_ciclo[anio]
         # Campo de formación
         campo_de_formacion_en_tabla = self._tabla_con_datos_requeridos.cell(3, 1)
-        campo_de_formacion_en_tabla.text = Programa._campo_de_formacion
+        campo_de_formacion_en_tabla.text = f"Técnico Especifico - Área de {area}"
         # Carga horaria
         carga_horaria_en_tabla = self._tabla_con_datos_requeridos.cell(4, 1)
         carga_horaria_en_tabla.text = f"{carga_horaria} horas cátedra"
@@ -97,6 +97,7 @@ class Programa:
             jefe_de_departamento_en_tabla,
         ]:
             for parrafo in celda.paragraphs:
+                parrafo.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
                 for run in parrafo.runs:
                     run.font.name = "Arial"
                     run.font.size = Pt(14)

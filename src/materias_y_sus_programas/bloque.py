@@ -1,3 +1,5 @@
+import re
+import unicodedata
 from typing import Any
 from src.documentos_en_word.programa import Programa
 from docx.document import Document
@@ -20,17 +22,70 @@ class Contenido:
         documento.add_paragraph(self._contenido_plano)
 
 
-class Encabezado1(Contenido):
+class Encabezado(Contenido):
+    def __init__(self, data: Any):
+        super().__init__(data)
+        self._contenido_plano = (
+            self._normalizar_titulo_si_pertenece_a_una_seccion_clave()
+        )
+
+    def _normalizar_titulo_si_pertenece_a_una_seccion_clave(self):
+        titulo = self._contenido_plano
+        # Diccionario de secciones con sus palabras clave principales
+        secciones_clave_y_variantes = {
+            "1- OBJETIVOS/ EXPECTATIVAS DE LOGROS/ CAPACIDADES": [
+                r"objetivos?",
+                r"expectativas?",
+                r"logros?",
+                r"capacidades?",
+            ],
+            "2- CONTENIDOS": [r"contenidos?"],
+            "3- METODOLOGÍA DE TRABAJO": [r"metodolog[ií]a", r"trabajo"],
+            "4- CRITERIO DE EVALUACIÓN": [r"criterio[s]?", r"evaluaci[oó]n"],
+            "5- BIBLIOGRAFÍA PARA EL ESTUDIANTE": [
+                r"bibliograf[ií]a",
+                r"estudiante[s]?",
+            ],
+        }
+
+        # Normalizamos el texto de entrada
+        titulo_normalizado = titulo.strip().lower()
+
+        for seccion_clave, variantes in secciones_clave_y_variantes.items():
+            # Coincidencia exacta ignorando mayúsculas/minúsculas y tildes
+            if self._eliminar_acentos(titulo_normalizado) in [
+                self._eliminar_acentos(parte_de_una_seccion_clave.lower())
+                for parte_de_una_seccion_clave in re.split(
+                    r"/|\|", seccion_clave.split("-", 1)[1]
+                )
+            ]:
+                return seccion_clave
+            # Coincidencia por palabra clave
+            for variante in variantes:
+                if re.search(variante, titulo_normalizado, re.IGNORECASE):
+                    return seccion_clave
+
+        return titulo
+
+    def _eliminar_acentos(self, s: str) -> str:
+        return "".join(
+            c
+            for c in unicodedata.normalize("NFD", s)
+            if unicodedata.category(c) != "Mn"
+        )
+
+
+class Encabezado1(Encabezado):
     def insertar_en_documento(self, documento: Document):
         documento.add_heading(self._contenido_plano.upper(), level=1)
 
 
-class Encabezado2(Contenido):
+class Encabezado2(Encabezado):
     def insertar_en_documento(self, documento: Document):
         documento.add_heading(self._contenido_plano.upper(), level=2)
 
 
-class Encabezado3(Contenido):
+class Encabezado3(Encabezado):
     def insertar_en_documento(self, documento: Document):
         documento.add_heading(self._contenido_plano, level=3)
 

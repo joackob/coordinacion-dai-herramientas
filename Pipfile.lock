@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c2c6a2cdc3fbf37cf418986335cd4b022511d7269bfe2837be422e8fa6043f78"
+            "sha256": "18b1bf1147c823317e8f501cda7134eb6e6d6b260cd3b23ebb99bdbabeb26c21"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -446,6 +446,22 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==2.33.2"
+        },
+        "pyrefly": {
+            "hashes": [
+                "sha256:0786de1e6209ee41bf88ca6435cd51d17eaa4e02444c9a3eb413729793535d18",
+                "sha256:1d76c05bd066ef7398bb05f91674206c9cc9fadb9113457044df545b29bf69d5",
+                "sha256:2218e207c06e69258735d6c13d888a680a4b18b5890c5b27f020185609a18c63",
+                "sha256:2f5684d853851f5436081593c61eab6544ce967de30f6c292c0a4d9277f1e8a6",
+                "sha256:329ebd3cf015ff734ec1779ef57c6a86b66b350d6d764ed94053cf85b4ffc502",
+                "sha256:6c9710c63bc2015ba9b66fd7d019f81339207863d625abbf204a62dbb06f9bfc",
+                "sha256:a4af7bae847fa71a6568599a4b6f718806e2c0d980c5935a3d450be8cad0bc53",
+                "sha256:eb85124d0f62549082c4a7da0186fb01b9d327943988fa226d6a438ff9f13ec2",
+                "sha256:f1728ae24da9a6c84f3cb61da011fe2e8708f8a99620600186a61f3237c01e66"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.33.1"
         },
         "python-docx": {
             "hashes": [

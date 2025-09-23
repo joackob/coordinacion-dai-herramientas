@@ -13,6 +13,7 @@ class Materia:
         propiedades = data["properties"]
         self._id = data["id"]
         self._nombre = propiedades["Nombre"]["formula"]["string"]
+        self._area = propiedades["Área"]["select"]["name"]
         self._anio = propiedades["Año"]["select"]["name"]
         self._carga_horaria = propiedades["Carga Horaria Semanal"]["number"]
         self._profesores_a_cargo: set[Profesor] = set()
@@ -33,6 +34,7 @@ class Materia:
             asignatura=self._nombre,
             anio=self._anio,
             carga_horaria=self._carga_horaria,
+            area=self._area,
         )
 
         documento.agregar_nombres_de_docentes(
