@@ -3,7 +3,7 @@ import os
 import asyncio
 import logging
 
-from src.bases_de_datos_en_notion.estudiantes_abp import Estudiantes
+from src.bases_de_datos_en_notion.estudiantes import Estudiantes
 
 _estudiantes_comision_d = [
     # 5to D
@@ -51,7 +51,7 @@ async def intentar_cargar_estudiantes_abp_5to():
     try:
         estudiantes = Estudiantes(
             notion_api_key=str(os.getenv("NOTION_API_KEY")),
-            database_id=str(os.getenv("ESTUDIANTES_ABP_5_DATABASE_ID")),
+            database_id=str(os.getenv("ESTUDIANTES_DATABASE_ID")),
             data_source_id=str(os.getenv("ESTUDIANTES_DATA_SOURCE_ID")),
             log_level=logging.ERROR,
         )
