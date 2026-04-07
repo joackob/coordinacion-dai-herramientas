@@ -1,7 +1,7 @@
 import re
 import unicodedata
 from typing import Any
-from src.documentos_en_word.programa import Programa
+from src.materias.documentos_en_word import Programa
 from docx.document import Document
 from docx.shared import Inches
 

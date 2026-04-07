@@ -2,7 +2,7 @@ import logging
 
 
 from src.bases_de_datos_en_notion import API
-from src.materias_y_sus_programas.bloque import BloqueDeContenido
+from src.materias.materias_en_notion.bloque_de_contenido import BloqueDeContenido
 
 
 class Programas(API):

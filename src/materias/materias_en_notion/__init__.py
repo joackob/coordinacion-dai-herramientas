@@ -9,7 +9,7 @@ class Materias(BDD):
 
     async def intentar_consultar_por_materia_segun_nombre(self, nombre: str) -> Materia:
         try:
-            respuesta = await self._notion_client.databases.query(
+            respuesta = await self._notion_client.data_sources.query(
                 **{
                     **self._certificados_para_consultas(),
                     "filter": {
@@ -28,7 +28,7 @@ class Materias(BDD):
 
     async def consultar_materias_por_area(self, area: str) -> list[Materia]:
         try:
-            respuesta = await self._notion_client.databases.query(
+            respuesta = await self._notion_client.data_sources.query(
                 **{
                     # "database_id": self._database_id,
                     **self._certificados_para_consultas(),

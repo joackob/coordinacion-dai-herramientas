@@ -4,7 +4,7 @@ from src.materias.materias_en_notion.programas_en_notion import Programas
 from src.nomina import Nomina
 from src.materias.materias_en_notion.bloque_de_contenido import BloqueDeContenido
 from src.profesores import Profesor
-from src.materias.materias_en_notion.programas_en_notion import Programa
+from src.materias.documentos_en_word import Programa
 
 
 class Materia:

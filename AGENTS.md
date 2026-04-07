@@ -184,7 +184,7 @@ def main():
 
 ```python
 try:
-    respuesta = await self._notion_client.databases.query(...)
+    respuesta = await self._notion_client.data_sources.query(...)
     return Materia(respuesta["results"][0])
 except Exception as e:
     logging.error(e)

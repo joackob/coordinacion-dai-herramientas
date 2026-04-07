@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.materias import Materias
+from src.materias.materias_en_notion import Materias
 
 
 @pytest.mark.asyncio
