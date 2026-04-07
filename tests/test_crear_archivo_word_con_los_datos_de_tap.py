@@ -1,9 +1,9 @@
 import os
 import pytest
 
-from src.bases_de_datos_en_notion.materias import Materias
-from src.bases_de_datos_en_notion.nomina import Nomina
-from src.bases_de_datos_en_notion.programas import Programas
+from src.materias.materias_en_notion import Materias
+from src.nomina import Nomina
+from src.materias.materias_en_notion.programas_en_notion import Programas
 from config import ubicacion_carpeta_donde_guardar_programas_generados
 
 

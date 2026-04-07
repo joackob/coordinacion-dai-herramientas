@@ -204,3 +204,6 @@ __marimo__/
 
 # Archivos creados
 programas/*.docx
+
+# vscode
+/.vscode

@@ -8,12 +8,12 @@ import click
 import pandas as pd
 import tqdm
 
-from src.bases_de_datos_en_notion.bdd import BDD
-from src.bases_de_datos_en_notion.estudiantes import Estudiantes
-from src.bases_de_datos_en_notion.estudiantes_cud import EstudiantesCUD
-from src.bases_de_datos_en_notion.materias import Materias
-from src.bases_de_datos_en_notion.nomina import Nomina
-from src.bases_de_datos_en_notion.programas import Programas
+from src.bases_de_datos_en_notion import BDD
+from src.estudiantes.estudiantes import Estudiantes
+from src.estudiantes.estudiantes_cud import EstudiantesCUD
+from src.materias.materias_en_notion import Materias
+from src.nomina import Nomina
+from src.materias.materias_en_notion.programas_en_notion import Programas
 
 
 def _obtener_log_level(verbose: bool) -> int:

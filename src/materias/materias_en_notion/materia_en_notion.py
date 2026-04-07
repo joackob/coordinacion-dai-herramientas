@@ -1,10 +1,10 @@
 from typing import Any
 
-from src.bases_de_datos_en_notion.programas import Programas
-from src.bases_de_datos_en_notion.nomina import Nomina
-from src.materias_y_sus_programas.bloque import BloqueDeContenido
-from src.materias_y_sus_programas.profesor import Profesor
-from src.documentos_en_word.programa import Programa
+from src.materias.materias_en_notion.programas_en_notion import Programas
+from src.nomina import Nomina
+from src.materias.materias_en_notion.bloque_de_contenido import BloqueDeContenido
+from src.profesores import Profesor
+from src.materias.materias_en_notion.programas_en_notion import Programa
 
 
 class Materia:

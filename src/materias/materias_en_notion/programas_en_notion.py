@@ -1,7 +1,7 @@
 import logging
 
 
-from src.bases_de_datos_en_notion.bdd import API
+from src.bases_de_datos_en_notion import API
 from src.materias_y_sus_programas.bloque import BloqueDeContenido
 
 

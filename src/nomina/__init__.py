@@ -1,7 +1,7 @@
 import logging
 
 
-from src.bases_de_datos_en_notion.bdd import BDD
+from src.bases_de_datos_en_notion import BDD
 from src.materias_y_sus_programas.profesor import Profesor
 
 

@@ -2,8 +2,8 @@ import os
 
 import pytest
 
-from src.bases_de_datos_en_notion.materias import Materias
-from src.bases_de_datos_en_notion.programas import Programas
+from src.materias.materias_en_notion import Materias
+from src.materias.materias_en_notion.programas_en_notion import Programas
 
 
 @pytest.mark.asyncio

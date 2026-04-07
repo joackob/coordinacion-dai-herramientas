@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.bases_de_datos_en_notion.materias import Materias
+from src.materias.materias_en_notion import Materias
 
 
 @pytest.mark.asyncio

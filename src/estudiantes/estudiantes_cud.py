@@ -2,7 +2,7 @@ import logging
 import random
 from dataclasses import dataclass
 
-from src.bases_de_datos_en_notion.bdd import BDD
+from src.bases_de_datos_en_notion import BDD
 
 
 @dataclass

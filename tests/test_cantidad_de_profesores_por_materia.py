@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.bases_de_datos_en_notion.nomina import Nomina
+from src.nomina import Nomina
 
 
 @pytest.mark.asyncio

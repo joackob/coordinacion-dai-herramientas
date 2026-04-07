@@ -1,8 +1,8 @@
 import logging
 
 
-from src.materias_y_sus_programas.materia import Materia
-from src.bases_de_datos_en_notion.bdd import BDD
+from src.materias.materias_en_notion.materia_en_notion import Materia
+from src.bases_de_datos_en_notion import BDD
 
 
 class Materias(BDD):
