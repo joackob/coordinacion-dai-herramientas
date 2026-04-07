@@ -11,6 +11,8 @@ click = "*"
 tqdm = "*"
 pydantic = "*"
 pyrefly = "*"
+pandas = "*"
+openpyxl = "*"
 
 [dev-packages]
 pytest = "*"
@@ -20,6 +22,8 @@ black = "*"
 [scripts]
 tests = "pytest tests/"
 format = "black ."
+pyrefly = "pyrefly check ."
+cli = "python -m main"
 cargar_estudiantes_abp_5to = "python -m utils_cli.cargar_estudiantes_abp_5to"
 cargar_historias = "python -m utils_cli.cargar_historias_en_backlog"
 descargar_programas_dai = "python -m utils_cli.descargar_programas_dai"

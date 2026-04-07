@@ -34,3 +34,21 @@ class BDD(API):
         return {
             "parent": {"type": "data_source_id", "data_source_id": self._data_source_id}
         }
+
+    async def crear_documento(self, datos: dict[str, str]) -> bool:
+        try:
+            properties = {}
+            for clave, valor in datos.items():
+                if clave.lower() == "name" or clave.lower() == "title":
+                    properties[clave] = {"title": [{"text": {"content": valor}}]}
+                else:
+                    properties[clave] = {"rich_text": [{"text": {"content": valor}}]}
+
+            await self._notion_client.pages.create(
+                **self._certificados_para_crear_paginas(),
+                properties=properties,
+            )
+            return True
+        except Exception as e:
+            logging.error(e)
+            return False

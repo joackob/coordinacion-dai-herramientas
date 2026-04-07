@@ -42,7 +42,35 @@ pipenv run format
 pipenv run pyrefly
 ```
 
-### Scripts CLI disponibles
+### CLI Unificada
+
+```bash
+pipenv run cli                    # Ejecutar sin argumentos muestra ayuda
+pipenv run cli ayuda              # Muestra todos los comandos disponibles
+pipenv run cli --help             # Muestra ayuda global
+```
+
+#### Descargar programas
+
+```bash
+pipenv run cli descargar programas --area dai    # Diseño de Aplicaciones Informáticas
+pipenv run cli descargar programas --area pdc    # Procesamiento Digital y Comunicaciones
+pipenv run cli descargar programas --area tics   # TICS (DAI + PDC)
+pipenv run cli descargar programas --area todas # Todas las áreas
+
+# Con modo verbose
+pipenv run cli -v descargar programas --area dai
+```
+
+#### Cargar estudiantes ABP 5to
+
+```bash
+pipenv run cli cargar estudiantes --comision 5to-d   # Comisión 5to D
+pipenv run cli cargar estudiantes --comision 5to-b   # Comisión 5to B
+pipenv run cli cargar estudiantes --comision todas   # Todas las comisiones
+```
+
+#### Scripts legacy (utils_cli)
 
 ```bash
 pipenv run cargar_estudiantes_abp_5to
