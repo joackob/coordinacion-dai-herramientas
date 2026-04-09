@@ -19,7 +19,6 @@ class DescargarProgramasCommand(Command):
         asyncio.run(self._descargar_programas())
 
     async def _descargar_programas(self) -> None:
-        materias = self._factory.crear_materias()
         nomina = self._factory.crear_nomina()
         programas = self._factory.crear_programas()
 
